@@ -89,20 +89,6 @@ function CreateAccount() {
                 />
               </div>
             </div>
-            <div className="mb-4">
-              <label
-                className="block text-gray-700 text-sm font-bold mb-2"
-                htmlFor="endereco"
-              >
-                Endereço
-              </label>
-              <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="endereco"
-                type="text"
-                placeholder="Digite seu endereço"
-              />
-            </div>
             <div className="grid gap-4 sm:grid-cols-2 mb-4">
               <div className="grid gap-1">
                 <label
