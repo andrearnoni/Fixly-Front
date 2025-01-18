@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import "./input.css";
 import GlobalProvider from "./context/GlobalContext";
 import ClientLogin from "./pages/ClientLogin";
+import CreateAccount from "./pages/CreateAccount";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login-client" element={<ClientLogin />} />
+          <Route path="/create-account" element={<CreateAccount />} />
         </Routes>
       </Router>
     </GlobalProvider>

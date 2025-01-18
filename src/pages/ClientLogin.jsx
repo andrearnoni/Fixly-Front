@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import logo from "../img/logo.png";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import video from "../img/trabalhadores.gif";
 
@@ -20,8 +21,11 @@ function ClientLogin() {
           />
         </aside>
         <main className="w-full lg:w-1/2 p-8">
+          <div>
+            <img src={logo} alt="Logo" className="w-20 mx-auto mb-4" />
+          </div>
           <div className="mb-4 text-center">
-            <h2 className="text-2xl font-bold text-balance">
+            <h2 className="text-xl font-bold text-balance">
               Já é cliente? Acesse sua conta
             </h2>
           </div>
