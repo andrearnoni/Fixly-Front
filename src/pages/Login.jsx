@@ -3,7 +3,7 @@ import logo from "../img/logo.png";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import video from "../img/trabalhadores.gif";
 
-function ClientLogin() {
+function Login() {
   const [senhaVisivel, setSenhaVisivel] = useState(false);
 
   const mudarVisibilidade = () => {
@@ -119,4 +119,4 @@ function ClientLogin() {
   );
 }
 
-export default ClientLogin;
+export default Login;
