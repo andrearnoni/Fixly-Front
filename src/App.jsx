@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import "./input.css";
 import GlobalProvider from "./context/GlobalContext";
-import ClientLogin from "./pages/ClientLogin";
+import Login from "./pages/Login";
 import CreateAccount from "./pages/CreateAccount";
 
 function App() {
@@ -12,8 +12,8 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login-client" element={<ClientLogin />} />
-          <Route path="/create-account" element={<CreateAccount />} />
+          <Route path="/login-client" element={<Login />} />
+          <Route path="/create-account/*" element={<CreateAccount />} />
         </Routes>
       </Router>
     </GlobalProvider>
