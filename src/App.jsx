@@ -5,6 +5,7 @@ import "./input.css";
 import GlobalProvider from "./context/GlobalContext";
 import Login from "./pages/Login";
 import CreateAccount from "./pages/CreateAccount";
+import Error from "./pages/Error";
 
 function App() {
   return (
@@ -12,8 +13,9 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login-client" element={<Login />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/create-account/*" element={<CreateAccount />} />
+          <Route path="*" element={<Error />} />
         </Routes>
       </Router>
     </GlobalProvider>

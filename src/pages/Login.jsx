@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import logo from "../img/logo.png";
+import logo1 from "../img/logo1.png";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import video from "../img/trabalhadores.gif";
 
@@ -22,7 +22,7 @@ function Login() {
         </aside>
         <main className="w-full lg:w-1/2 p-8">
           <div>
-            <img src={logo} alt="Logo" className="w-20 mx-auto mb-4" />
+            <img src={logo1} alt="Logo" className="w-20 mx-auto mb-4" />
           </div>
           <div className="mb-4 text-center">
             <h2 className="text-xl font-bold text-balance">
