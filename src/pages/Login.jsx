@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import logo1 from "../img/logo1.png";
+import { Link } from "react-router-dom";
+import logo2 from "../img/logo2.png";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import video from "../img/trabalhadores.gif";
 
@@ -22,7 +23,7 @@ function Login() {
         </aside>
         <main className="w-full lg:w-1/2 p-8">
           <div>
-            <img src={logo1} alt="Logo" className="w-20 mx-auto mb-4" />
+            <img src={logo2} alt="Logo" className="w-20 mx-auto mb-4" />
           </div>
           <div className="mb-4 text-center">
             <h2 className="text-xl font-bold text-balance">
@@ -66,18 +67,18 @@ function Login() {
               </button>
             </div>
             <div className="mb-4 flex items-center justify-between">
-              <a
-                href="#"
+              <Link
+                to="/forgotten-password"
                 className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
               >
                 Esqueceu sua senha?
-              </a>
-              <a
-                href="#"
+              </Link>
+              <Link
+                to="/create-account"
                 className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
               >
                 Criar conta
-              </a>
+              </Link>
             </div>
             <div className="mb-4">
               <button

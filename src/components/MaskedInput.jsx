@@ -1,72 +1,101 @@
-import React from "react";
+import React, { useState } from "react";
 
 const MaskedInput = ({
   id,
   label,
   placeholder,
-  mask,
   name,
   value,
-  type,
+  type = "text",
+  mask,
+  validationPattern,
+  errorMessage,
   onChange,
 }) => {
-  const handleMaskChange = (e) => {
-    let { value } = e.target;
-    value = value.replace(/\D/g, ""); // Remove tudo que não for dígito
+  const [isValid, setIsValid] = useState(true);
+  const [showError, setShowError] = useState(false);
+  const [isEmpty, setIsEmpty] = useState(true);
 
-    switch (mask) {
+  const applyMask = (rawValue, maskType) => {
+    let maskedValue =
+      maskType === "email" ? rawValue : rawValue.replace(/\D/g, "");
+
+    switch (maskType) {
       case "cpf":
-        if (value.length > 11) value = value.slice(0, 11);
-        value = value
+        if (maskedValue.length > 11) maskedValue = maskedValue.slice(0, 11);
+        return maskedValue
           .replace(/(\d{3})(\d)/, "$1.$2")
           .replace(/(\d{3})(\d)/, "$1.$2")
           .replace(/(\d{3})(\d{1,2})$/, "$1-$2");
-        break;
       case "cnpj":
-        if (value.length > 14) value = value.slice(0, 14);
-        value = value
+        if (maskedValue.length > 14) maskedValue = maskedValue.slice(0, 14);
+        return maskedValue
           .replace(/(\d{2})(\d)/, "$1.$2")
           .replace(/(\d{3})(\d)/, "$1.$2")
           .replace(/(\d{3})(\d)/, "$1/$2")
           .replace(/(\d{4})(\d{1,2})$/, "$1-$2");
-        break;
       case "telefone":
-        if (/^\d{2}[6-9]/.test(value)) {
-          if (value.length > 11) value = value.slice(0, 11);
-          value = value
+        if (/^\d{2}[6-9]/.test(maskedValue)) {
+          if (maskedValue.length > 11) maskedValue = maskedValue.slice(0, 11);
+          return maskedValue
             .replace(/(\d{2})(\d)/, "($1) $2")
             .replace(/(\d{5})(\d{4})$/, "$1-$2");
         } else {
-          if (value.length > 10) value = value.slice(0, 10);
-          value = value
+          if (maskedValue.length > 10) maskedValue = maskedValue.slice(0, 10);
+          return maskedValue
             .replace(/(\d{2})(\d)/, "($1) $2")
             .replace(/(\d{4})(\d{4})$/, "$1-$2");
         }
-        break;
       case "data":
-        if (value.length > 8) value = value.slice(0, 8);
-        value = value
+        if (maskedValue.length > 8) maskedValue = maskedValue.slice(0, 8);
+        return maskedValue
           .replace(/(\d{2})(\d)/, "$1/$2")
           .replace(/(\d{2})(\d)/, "$1/$2")
           .replace(/(\d{4})$/, "$1");
-        break;
       case "cep":
-        if (value.length > 8) value = value.slice(0, 8);
-        value = value
+        if (maskedValue.length > 8) maskedValue = maskedValue.slice(0, 8);
+        return maskedValue
           .replace(/(\d{2})(\d)/, "$1.$2")
           .replace(/(\d{3})(\d{3})$/, "$1-$2");
-        break;
-
+      case "email":
+        return maskedValue.replace(/[^a-zA-Z0-9@._-]/g, "");
       default:
-        break;
+        return rawValue;
     }
+  };
+
+  const validateInput = (inputValue) => {
+    if (!validationPattern) return true;
+    const regex = new RegExp(validationPattern);
+    return regex.test(inputValue);
+  };
+
+  const handleChange = (e) => {
+    const rawValue = e.target.value;
+    const maskedValue = mask ? applyMask(rawValue, mask) : rawValue;
 
     onChange({
       target: {
         name,
-        value,
+        value: maskedValue,
       },
     });
+
+    setIsEmpty(maskedValue === "");
+  };
+
+  const handleBlur = () => {
+    if (value === "") {
+      setShowError(false);
+    } else {
+      const valid = validateInput(value);
+      setIsValid(valid);
+      setShowError(!valid);
+    }
+  };
+
+  const handleFocus = () => {
+    setShowError(false);
   };
 
   return (
@@ -78,14 +107,21 @@ const MaskedInput = ({
         {label}
       </label>
       <input
-        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         id={id}
+        className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+          !isValid && !isEmpty && showError ? "border-red-500 border-[3px]" : ""
+        }`}
         type={type}
         placeholder={placeholder}
         name={name}
         value={value}
-        onChange={handleMaskChange}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        onFocus={handleFocus}
       />
+      {showError && (
+        <p className="text-red-500 text-xs italic mt-2">{errorMessage}</p>
+      )}
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../context/GlobalContext";
+import MaskedInput from "../components/MaskedInput";
 
 const CreateAccountStep1 = () => {
   const {
@@ -72,27 +73,22 @@ const CreateAccountStep1 = () => {
                 type="text"
                 placeholder="Digite seu nome completo"
                 name="nome"
+                autoComplete="off"
                 value={formData.nome}
                 onChange={handleChange}
               />
             </div>
-            <div className="mb-4">
-              <label
-                className="block text-gray-700 text-sm font-bold mb-2"
-                htmlFor="email"
-              >
-                Email
-              </label>
-              <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="email"
-                type="email"
-                placeholder="Digite seu email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-              />
-            </div>
+            <MaskedInput
+              id="email"
+              label="Email"
+              placeholder="Digite seu email"
+              name="email"
+              value={formData.email}
+              mask="email"
+              validationPattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+              errorMessage="Email inválido"
+              onChange={handleChange}
+            />
             <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2">
                 Tipo de usuário
