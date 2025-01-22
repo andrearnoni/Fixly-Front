@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MaskedInput from "../components/MaskedInput";
 import logo2 from "../img/logo2.png";
@@ -37,7 +37,7 @@ function ForgottenPasword() {
 
   return (
     <div className="flex items-center justify-center h-screen p-4">
-      <div className="flex flex-col lg:flex-row bg-[#FCFCFB] rounded-lg shadow-lg w-full max-w-sm lg:max-w-2xl">
+      <div className="flex flex-col lg:flex-row bg-[#FCFCFB] rounded-lg lg:shadow-lg w-full max-w-sm lg:max-w-2xl">
         <aside className="hidden lg:block lg:w-1/2">
           <img
             src={video}
