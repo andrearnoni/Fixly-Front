@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo2 from "../img/logo2.png";
 import video from "../img/trabalhadores.gif";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Swal from "sweetalert2";
 
 function ResetPassword() {
@@ -9,7 +10,17 @@ function ResetPassword() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isPasswordValid, setIsPasswordValid] = useState(true);
   const [doPasswordsMatch, setDoPasswordsMatch] = useState(true);
+  const [senhaVisivel, setSenhaVisivel] = useState(false);
+  const [confirmSenhaVisivel, setConfirmSenhaVisivel] = useState(false);
   const navigate = useNavigate();
+
+  const mudarVisibilidadeSenha = () => {
+    setSenhaVisivel(!senhaVisivel);
+  };
+
+  const mudarVisibilidadeConfirmSenha = () => {
+    setConfirmSenhaVisivel(!confirmSenhaVisivel);
+  };
 
   const validatePassword = (password) => {
     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,}$/;
@@ -40,7 +51,7 @@ function ResetPassword() {
       timer: 2500,
     });
     setTimeout(() => {
-      navigate("/");
+      navigate("/login");
     }, 2500);
   };
 
@@ -64,7 +75,7 @@ function ResetPassword() {
             </h2>
           </div>
           <form onSubmit={handleSubmit}>
-            <div className="mb-4">
+            <div className="mb-4 relative">
               <label
                 htmlFor="password"
                 className="block text-gray-700 text-sm font-bold mb-2"
@@ -73,7 +84,7 @@ function ResetPassword() {
               </label>
               <input
                 id="password"
-                type="password"
+                type={senhaVisivel ? "text" : "password"}
                 placeholder="Digite sua nova senha"
                 value={password}
                 onChange={handlePasswordChange}
@@ -83,6 +94,18 @@ function ResetPassword() {
                     : "border-gray-300"
                 }`}
               />
+              <button
+                type="button"
+                className={`absolute
+                  ${
+                    !isPasswordValid && password
+                      ? "top-[2.5rem]"
+                      : "bottom-[0.7rem]"
+                  } right-0 pr-3 flex items-center text-gray-600`}
+                onClick={mudarVisibilidadeSenha}
+              >
+                {senhaVisivel ? <FaEyeSlash /> : <FaEye />}
+              </button>
               {!isPasswordValid && password && (
                 <p className="text-red-500 text-xs italic mt-2">
                   A senha deve ter pelo menos 6 caracteres, incluindo uma letra
@@ -90,7 +113,7 @@ function ResetPassword() {
                 </p>
               )}
             </div>
-            <div className="mb-4">
+            <div className="mb-4 relative">
               <label
                 htmlFor="confirm-password"
                 className="block text-gray-700 text-sm font-bold mb-2"
@@ -99,7 +122,7 @@ function ResetPassword() {
               </label>
               <input
                 id="confirm-password"
-                type="password"
+                type={confirmSenhaVisivel ? "text" : "password"}
                 placeholder="Confirme sua nova senha"
                 value={confirmPassword}
                 onChange={handleConfirmPasswordChange}
@@ -109,6 +132,18 @@ function ResetPassword() {
                     : "border-gray-300"
                 }`}
               />
+              <button
+                type="button"
+                className={`absolute
+                  ${
+                    !doPasswordsMatch && confirmPassword
+                      ? "top-[2.5rem]"
+                      : "top-[2.4rem]"
+                  } right-0 pr-3 flex items-center text-gray-600`}
+                onClick={mudarVisibilidadeConfirmSenha}
+              >
+                {confirmSenhaVisivel ? <FaEyeSlash /> : <FaEye />}
+              </button>
               {!doPasswordsMatch && confirmPassword && (
                 <p className="text-red-500 text-xs italic mt-2">
                   As senhas não coincidem.
