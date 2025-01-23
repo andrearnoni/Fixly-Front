@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MaskedInput from "../components/MaskedInput";
+import { FaArrowLeft } from "react-icons/fa";
 import logo2 from "../img/logo2.png";
 import video from "../img/trabalhadores.gif";
 import Swal from "sweetalert2";
@@ -9,6 +10,10 @@ function ForgottenPasword() {
   const [email, setEmail] = useState("");
   const [isEmailValid, setIsEmailValid] = useState(false);
   const navigate = useNavigate();
+
+  const handleReturn = () => {
+    window.history.back();
+  };
 
   const validateEmail = (email) => {
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -37,7 +42,14 @@ function ForgottenPasword() {
 
   return (
     <div className="flex items-center justify-center h-screen p-4">
-      <div className="flex flex-col lg:flex-row bg-[#FCFCFB] rounded-lg lg:shadow-lg w-full max-w-sm lg:max-w-2xl">
+      <div className="flex flex-col lg:flex-row bg-[#FCFCFB] rounded-lg lg:shadow-lg w-full max-w-sm lg:max-w-2xl relative">
+        <button
+          onClick={handleReturn}
+          className="absolute top-4 left-4 text-gray-400 hover:text-gray-900 focus:outline-none"
+          aria-label="Voltar"
+        >
+          <FaArrowLeft className="w-6 h-6" />
+        </button>
         <aside className="hidden lg:block lg:w-1/2">
           <img
             src={video}

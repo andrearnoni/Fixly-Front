@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../context/GlobalContext";
 import MaskedInput from "../components/MaskedInput";
+import { FaArrowLeft } from "react-icons/fa";
 
 const CreateAccountStep1 = () => {
   const {
@@ -14,6 +15,10 @@ const CreateAccountStep1 = () => {
   } = useContext(Context);
   const navigate = useNavigate();
   const [confirmacaoSenha, setConfirmacaoSenha] = useState("");
+
+  const handleReturn = () => {
+    window.history.back();
+  };
 
   useEffect(() => {
     if (!formData.tipoUsuario) {
@@ -52,7 +57,14 @@ const CreateAccountStep1 = () => {
 
   return (
     <div className="flex items-center justify-center h-screen p-4">
-      <div className="flex flex-col lg:flex-row bg-[#FCFCFB] rounded-lg shadow-lg w-full max-w-sm lg:max-w-3xl">
+      <div className="flex flex-col lg:flex-row bg-[#FCFCFB] rounded-lg shadow-lg w-full max-w-sm lg:max-w-3xl relative">
+        <button
+          onClick={handleReturn}
+          className="absolute top-4 left-4 text-gray-400 hover:text-gray-900 focus:outline-none"
+          aria-label="Voltar"
+        >
+          <FaArrowLeft className="w-6 h-6" />
+        </button>
         <main className="w-full p-8">
           <div className="mb-4 text-center">
             <h2 className="text-2xl font-bold text-balance">

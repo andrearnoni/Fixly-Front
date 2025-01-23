@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import logo2 from "../img/logo2.png";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaEye, FaEyeSlash, FaArrowLeft } from "react-icons/fa";
 import video from "../img/trabalhadores.gif";
 
 function Login() {
   const [senhaVisivel, setSenhaVisivel] = useState(false);
+
+  const handleReturn = () => {
+    window.history.back();
+  };
 
   const mudarVisibilidade = () => {
     setSenhaVisivel(!senhaVisivel);
@@ -13,7 +17,15 @@ function Login() {
 
   return (
     <div className="flex items-center justify-center h-screen p-4">
-      <div className="flex flex-col lg:flex-row bg-[#FCFCFB] rounded-lg shadow-lg w-full max-w-sm lg:max-w-2xl">
+      <div className="flex flex-col lg:flex-row bg-[#FCFCFB] rounded-lg shadow-lg w-full max-w-sm lg:max-w-2xl relative">
+        <button
+          onClick={handleReturn}
+          className="absolute top-4 left-4 text-gray-400 hover:text-gray-900 focus:outline-none"
+          aria-label="Voltar"
+        >
+          <FaArrowLeft className="w-6 h-6" />
+        </button>
+
         <aside className="hidden lg:block lg:w-1/2">
           <img
             src={video}
