@@ -1,9 +1,15 @@
 import React, { useState } from "react";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import logo2 from "../img/logo2.png";
+import { FaEye, FaEyeSlash, FaArrowLeft } from "react-icons/fa";
 import video from "../img/trabalhadores.gif";
 
-function ClientLogin() {
+function Login() {
   const [senhaVisivel, setSenhaVisivel] = useState(false);
+
+  const handleReturn = () => {
+    window.history.back();
+  };
 
   const mudarVisibilidade = () => {
     setSenhaVisivel(!senhaVisivel);
@@ -11,7 +17,15 @@ function ClientLogin() {
 
   return (
     <div className="flex items-center justify-center h-screen p-4">
-      <div className="flex flex-col lg:flex-row bg-[#FCFCFB] rounded-lg shadow-lg w-full max-w-sm lg:max-w-2xl">
+      <div className="flex flex-col lg:flex-row bg-[#FCFCFB] rounded-lg shadow-lg w-full max-w-sm lg:max-w-2xl relative">
+        <button
+          onClick={handleReturn}
+          className="absolute top-4 left-4 text-gray-400 hover:text-gray-900 focus:outline-none"
+          aria-label="Voltar"
+        >
+          <FaArrowLeft className="w-6 h-6" />
+        </button>
+
         <aside className="hidden lg:block lg:w-1/2">
           <img
             src={video}
@@ -20,8 +34,11 @@ function ClientLogin() {
           />
         </aside>
         <main className="w-full lg:w-1/2 p-8">
+          <div>
+            <img src={logo2} alt="Logo" className="w-20 mx-auto mb-4" />
+          </div>
           <div className="mb-4 text-center">
-            <h2 className="text-2xl font-bold text-balance">
+            <h2 className="text-xl font-bold text-balance">
               Já é cliente? Acesse sua conta
             </h2>
           </div>
@@ -62,18 +79,18 @@ function ClientLogin() {
               </button>
             </div>
             <div className="mb-4 flex items-center justify-between">
-              <a
-                href="#"
+              <Link
+                to="/forgotten-password"
                 className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
               >
                 Esqueceu sua senha?
-              </a>
-              <a
-                href="#"
+              </Link>
+              <Link
+                to="/create-account"
                 className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
               >
                 Criar conta
-              </a>
+              </Link>
             </div>
             <div className="mb-4">
               <button
@@ -115,4 +132,4 @@ function ClientLogin() {
   );
 }
 
-export default ClientLogin;
+export default Login;

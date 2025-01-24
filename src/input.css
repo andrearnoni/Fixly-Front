@@ -16,6 +16,18 @@ body {
   }
 }
 
-font-sans {
-  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+.swiper-pagination {
+  color: #07AFFF;
+}
+
+.swiper-button-prev, .swiper-button-next {
+  color: #07AFFF;
+}
+
+.swiper-button-prev::after {
+  font-size: 10px;
+}
+
+.swiper-button-next::after {
+  font-size: 10px;
 }
