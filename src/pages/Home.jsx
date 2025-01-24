@@ -1,10 +1,12 @@
-import React from "react";
+import Navbar from "../components/Navbar";
+import Carrossel from "../components/Carrossel"
 
 function Home() {
   return (
-    <div>
-      <p>Olá mundo!</p>
-    </div>
+    <>
+      <Navbar />
+      <Carrossel />
+    </>
   );
 }
 
