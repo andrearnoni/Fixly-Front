@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../context/GlobalContext";
 import MaskedInput from "./MaskedInput";
+import autoCompleteService from "../services/AutoCompleteService";
 
 const CreateAccountStep2 = () => {
   const { setStep, stepCompleto, tipoUsuario, formData, setFormData } =
@@ -18,10 +19,6 @@ const CreateAccountStep2 = () => {
       navigate("/create-account/step1");
     }
   }, [stepCompleto, navigate]);
-
-  useEffect(() => {
-    console.log("FormData atualizado:", formData);
-  }, [formData]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -92,7 +89,10 @@ const CreateAccountStep2 = () => {
                   mask="cep"
                   validationPattern="^\d{2}\.\d{3}-\d{3}$"
                   errorMessage="CEP inválido. Use o formato 00.000-000"
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    handleChange(e);
+                    autoCompleteService(e.target.value, setFormData);
+                  }}
                 />
               </div>
               <div className="mb-4">
