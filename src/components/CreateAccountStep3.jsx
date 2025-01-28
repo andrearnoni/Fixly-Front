@@ -30,7 +30,7 @@ const CreateAccountStep3 = () => {
 
   return (
     <div className="flex items-center justify-center h-screen p-4">
-      <div className="flex flex-col lg:flex-row bg-[#FCFCFB] rounded-lg shadow-lg w-full max-w-sm lg:max-w-3xl">
+      <div className="flex flex-col lg:flex-row lg:bg-[#FCFCFB] sm:bg-white rounded-lg w-full max-w-md lg:max-w-3xl relative lg:shadow-lg">
         <main className="w-full p-8">
           <div className="mb-4 text-center">
             <h2 className="text-2xl font-bold text-balance">

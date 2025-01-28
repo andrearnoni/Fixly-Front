@@ -7,7 +7,7 @@ html {
 }
 
 body {
-  @apply bg-gray-100 font-sans;
+  @apply lg:bg-gray-100 font-sans;
 }
 
 @layer components {
