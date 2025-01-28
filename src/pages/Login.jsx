@@ -17,7 +17,7 @@ function Login() {
 
   return (
     <div className="flex items-center justify-center h-screen p-4">
-      <div className="flex flex-col lg:flex-row bg-[#FCFCFB] rounded-lg shadow-lg w-full max-w-sm lg:max-w-2xl relative">
+      <div className="flex flex-col lg:flex-row lg:bg-[#FCFCFB] sm:bg-white rounded-lg w-full max-w-md lg:max-w-2xl relative lg:shadow-lg">
         <button
           onClick={handleReturn}
           className="absolute top-4 left-4 text-gray-400 hover:text-gray-900 focus:outline-none"
