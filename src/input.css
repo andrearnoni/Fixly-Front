@@ -15,3 +15,19 @@ body {
     @apply rounded-md border-2 border-black bg-white p-2 text-black focus:outline-none focus:ring-2 focus:ring-black focus:border-black placeholder:text-black/40;
   }
 }
+
+.swiper-pagination {
+  color: #07AFFF;
+}
+
+.swiper-button-prev, .swiper-button-next {
+  color: #07AFFF;
+}
+
+.swiper-button-prev::after {
+  font-size: 10px;
+}
+
+.swiper-button-next::after {
+  font-size: 10px;
+}
