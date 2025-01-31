@@ -1,6 +1,7 @@
 import Navbar from "../components/Navbar";
 import Carrossel from "../components/Carrossel"
 import Main from "../components/Main"
+import Footer from "../components/Footer";
 
 function Home() {
   return (
@@ -8,6 +9,7 @@ function Home() {
       <Navbar />
       <Carrossel />
       <Main />
+      <Footer/>
     </>
   );
 }
