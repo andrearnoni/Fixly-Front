@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import LinkLoading from "../components/LinkLoading";
 import logo2 from "../img/logo2.png";
 import { FaEye, FaEyeSlash, FaArrowLeft } from "react-icons/fa";
 import video from "../img/trabalhadores.gif";
@@ -60,15 +60,15 @@ function Login() {
             <div className="mb-4 relative">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
-                htmlFor="password"
+                htmlFor="senha"
               >
-                Password
+                Senha
               </label>
               <input
                 className="shadow appearance-none border rounded w-full py-2 px-3 pr-10 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="password"
+                id="senha"
                 type={senhaVisivel ? "text" : "password"}
-                placeholder="Password"
+                placeholder="Digite sua senha"
               />
               <button
                 type="button"
@@ -79,18 +79,18 @@ function Login() {
               </button>
             </div>
             <div className="mb-4 flex items-center justify-between">
-              <Link
-                to="/forgotten-password"
+              <LinkLoading
+                to="/esqueci-a-senha"
                 className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
               >
                 Esqueceu sua senha?
-              </Link>
-              <Link
-                to="/create-account"
+              </LinkLoading>
+              <LinkLoading
+                to="/cadastro"
                 className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
               >
                 Criar conta
-              </Link>
+              </LinkLoading>
             </div>
             <div className="mb-4">
               <button

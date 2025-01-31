@@ -10,13 +10,10 @@ const CreateAccount = () => {
 
   return (
     <Routes>
-      <Route path="step1" element={<CreateAccountStep1 />} />
-      <Route path="step2" element={<CreateAccountStep2 />} />
-      <Route path="step3" element={<CreateAccountStep3 />} />
-      <Route
-        path="*"
-        element={<Navigate to={`/create-account/step${step}`} />}
-      />
+      <Route path="passo1" element={<CreateAccountStep1 />} />
+      <Route path="passo2" element={<CreateAccountStep2 />} />
+      <Route path="passo3" element={<CreateAccountStep3 />} />
+      <Route path="*" element={<Navigate to={`/cadastro/passo${step}`} />} />
     </Routes>
   );
 };

@@ -10,6 +10,14 @@ function GlobalContext({ children }) {
   const [stepCompleto, setStepCompleto] = useState(false);
   const [tipoUsuario, setTipoUsuario] = useState("cliente");
   const [termosAceitos, setTermosAceitos] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const startLoading = () => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
+  };
 
   const [formData, setFormData] = useState({
     nome: "",
@@ -44,6 +52,8 @@ function GlobalContext({ children }) {
     setTermosAceitos,
     formData,
     setFormData,
+    isLoading,
+    startLoading,
   };
 
   return <Context.Provider value={Object}>{children}</Context.Provider>;
