@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Context } from "../context/GlobalContext";
+import Context from "../context/Context";
 import { Link } from "react-router-dom";
 import LinkLoading from "../components/LinkLoading";
 import logo from "../img/logo2.png";
@@ -32,14 +32,14 @@ function Navbar() {
         <div className="flex items-center space-x-3 md:order-2">
           <LinkLoading
             to="/cadastro"
-            className="block py-2 px-3 text-gray-900 rounded hover:text-blue-400"
+            className="block py-2 px-3 text-gray-900 rounded hover:text-[#07AFFF]"
             aria-current="page"
           >
             Cadastrar
           </LinkLoading>
           <LinkLoading
             to="/login"
-            className="text-white bg-blue-500 hover:bg-blue-700 focus:outline-none font-medium rounded-xl text-sm px-4 py-2"
+            className="text-white font-semibold bg-gradient-to-r from-[#07AFFF] to-[#0470AE] transition-colors hover:from-[#058EDC] hover:to-[#03598A] focus:outline-none rounded-xl text-sm px-4 py-2"
           >
             Entrar
           </LinkLoading>
@@ -76,7 +76,7 @@ function Navbar() {
             <li>
               <Link
                 to="#"
-                className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-400"
+                className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#07AFFF]"
                 onClick={() => handleScrollToSection("comoFunciona")}
               >
                 Como Funciona?
@@ -85,7 +85,7 @@ function Navbar() {
             <li>
               <Link
                 to="#inicio"
-                className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-400"
+                className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#07AFFF]"
               >
                 Início
               </Link>
@@ -93,7 +93,7 @@ function Navbar() {
             <li>
               <Link
                 to="#servicos"
-                className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-400"
+                className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#07AFFF]"
               >
                 Serviços
               </Link>
@@ -101,7 +101,7 @@ function Navbar() {
             <li>
               <Link
                 to="#contato"
-                className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-400"
+                className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#07AFFF]"
               >
                 Contato
               </Link>

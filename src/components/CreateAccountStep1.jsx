@@ -1,8 +1,9 @@
-import React, { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Context } from "../context/GlobalContext";
+import Context from "../context/Context";
 import MaskedInput from "../components/MaskedInput";
-import { FaArrowLeft } from "react-icons/fa";
+import { ArrowLeft, Eye, EyeOff, ArrowRight } from "lucide-react";
+import logo2 from "../img/logo2.png";
 
 const CreateAccountStep1 = () => {
   const {
@@ -15,20 +16,13 @@ const CreateAccountStep1 = () => {
   } = useContext(Context);
   const navigate = useNavigate();
   const [confirmacaoSenha, setConfirmacaoSenha] = useState("");
-
-  const handleReturn = () => {
-    window.history.back();
-  };
+  const [senhaVisivel, setSenhaVisivel] = useState(false);
 
   useEffect(() => {
     if (!formData.tipoUsuario) {
       setFormData({ ...formData, tipoUsuario });
     }
   }, [formData, setFormData, tipoUsuario]);
-
-  const handleConfirmaçãoSenha = (e) => {
-    setConfirmacaoSenha(e.target.value);
-  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -42,141 +36,169 @@ const CreateAccountStep1 = () => {
     e.preventDefault();
     setStepCompleto(true);
     setStep(2);
-    navigate("/create-account/step2");
+    navigate("/cadastro/passo2");
   };
 
   const isFormValid = () => {
+    const nomeValido = /^\s*\S+(\s+\S+)+\s*$/.test(formData.nome);
+    const emailValido = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(
+      formData.email
+    );
+    const senhaValida = formData.senha && formData.senha.length >= 6;
+    const senhasIguais = formData.senha === confirmacaoSenha;
+    const tipoSelecionado = !!formData.tipoUsuario;
+
     return (
-      formData.nome &&
-      formData.email &&
-      formData.senha &&
-      formData.tipoUsuario &&
-      formData.senha === confirmacaoSenha
+      nomeValido &&
+      emailValido &&
+      senhaValida &&
+      senhasIguais &&
+      tipoSelecionado
     );
   };
 
   return (
-    <div className="flex items-center justify-center h-screen p-4">
-      <div className="flex flex-col lg:flex-row lg:bg-[#FCFCFB] sm:bg-white rounded-lg w-full max-w-md lg:max-w-3xl relative lg:shadow-lg">
+    <div className="flex items-center justify-center min-h-screen py-8 px-4 bg-white sm:bg-gradient-to-br sm:from-white sm:to-blue-200">
+      <div className="flex flex-col lg:flex-row lg:bg-[#FCFCFB] lg:rounded-2xl lg:shadow-lg w-full max-w-md lg:max-w-2xl relative">
         <button
-          onClick={handleReturn}
+          onClick={() => navigate("/")}
           className="absolute top-4 left-4 text-gray-400 hover:text-gray-900 focus:outline-none"
           aria-label="Voltar"
         >
-          <FaArrowLeft className="w-6 h-6" />
+          <ArrowLeft className="w-6 h-6" />
         </button>
         <main className="w-full p-8">
-          <div className="mb-4 text-center">
-            <h2 className="text-2xl font-bold text-balance">
-              Crie sua conta gratuita - Passo 1
+          <div className="mb-8 text-center">
+            <img src={logo2} alt="Logo" className="w-20 mx-auto mb-4" />
+            <h2 className="text-2xl font-bold text-gray-700">
+              Crie sua conta gratuita
             </h2>
           </div>
-          <form onSubmit={handleSubmit}>
-            <div className="mb-4">
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div>
               <label
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block text-gray-700 text-sm font-bold mb-1"
                 htmlFor="nome"
               >
                 Nome completo
               </label>
-              <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              <MaskedInput
                 id="nome"
-                type="text"
                 placeholder="Digite seu nome completo"
                 name="nome"
-                autoComplete="off"
                 value={formData.nome}
+                type="text"
+                validationPattern="^\s*\S+(\s+\S+)+\s*$"
+                errorMessage="Digite seu nome e sobrenome"
                 onChange={handleChange}
+                required
+                hasIcon={false}
               />
             </div>
-            <MaskedInput
-              id="email"
-              label="Email"
-              placeholder="Digite seu email"
-              name="email"
-              value={formData.email}
-              mask="email"
-              validationPattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-              errorMessage="Email inválido"
-              onChange={handleChange}
-            />
-            <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
+            <div>
+              <label
+                className="block text-gray-700 text-sm font-bold mb-1"
+                htmlFor="email"
+              >
+                Email
+              </label>
+              <MaskedInput
+                id="email"
+                placeholder="Digite seu email"
+                name="email"
+                value={formData.email}
+                type="email"
+                validationPattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                errorMessage="Email inválido"
+                onChange={handleChange}
+                required
+                hasIcon={false}
+              />
+            </div>
+            <div className="my-4">
+              <label className="block text-gray-700 text-sm font-bold mb-1">
                 Tipo de usuário
               </label>
-              <div className="flex items-center">
-                <input
-                  className="mr-2 leading-tight"
-                  type="radio"
-                  id="cliente"
-                  name="tipoUsuario"
-                  value="cliente"
-                  onChange={handleChange}
-                  checked={formData.tipoUsuario === "cliente"}
-                />
-                <label className="text-gray-700" htmlFor="cliente">
+              <div className="flex flex-col gap-2">
+                <label className="flex items-center gap-2">
+                  <input
+                    type="radio"
+                    name="tipoUsuario"
+                    value="cliente"
+                    onChange={handleChange}
+                    checked={formData.tipoUsuario === "cliente"}
+                  />
                   Quero contratar um serviço
                 </label>
-              </div>
-              <div className="flex items-center">
-                <input
-                  className="mr-2 leading-tight"
-                  type="radio"
-                  id="prestador"
-                  name="tipoUsuario"
-                  value="prestador"
-                  onChange={handleChange}
-                  checked={formData.tipoUsuario === "prestador"}
-                />
-                <label className="text-gray-700" htmlFor="prestador">
+                <label className="flex items-center gap-2">
+                  <input
+                    type="radio"
+                    name="tipoUsuario"
+                    value="prestador"
+                    onChange={handleChange}
+                    checked={formData.tipoUsuario === "prestador"}
+                  />
                   Quero me registrar como prestador de serviços
                 </label>
               </div>
             </div>
-            <div className="mb-4 relative">
-              <label
-                className="block text-gray-700 text-sm font-bold mb-2"
-                htmlFor="senha"
-              >
+            <div>
+              <label className="block text-gray-700 text-sm font-bold mb-1">
                 Senha
               </label>
-              <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 pr-10 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="senha"
-                type="password"
-                placeholder="Cadastre uma senha de 6 dígitos"
-                name="senha"
-                value={formData.senha}
-                onChange={handleChange}
-              />
+              <div className="relative">
+                <MaskedInput
+                  id="senha"
+                  placeholder="Digite sua senha"
+                  name="senha"
+                  value={formData.senha}
+                  type={senhaVisivel ? "text" : "password"}
+                  validationPattern=".{6,}"
+                  errorMessage="Senha deve ter pelo menos 6 caracteres"
+                  onChange={handleChange}
+                  required
+                  hasIcon={false}
+                  eyesIcon={true}
+                />
+                <button
+                  type="button"
+                  onClick={() => setSenhaVisivel(!senhaVisivel)}
+                  className="absolute right-3 top-2.5 text-gray-400 hover:text-gray-600"
+                >
+                  {senhaVisivel ? (
+                    <EyeOff className="h-5 w-5" />
+                  ) : (
+                    <Eye className="h-5 w-5" />
+                  )}
+                </button>
+              </div>
             </div>
-            <div className="mb-4 relative">
-              <label
-                className="block text-gray-700 text-sm font-bold mb-2"
-                htmlFor="confirmacaoSenha"
-              >
+            <div>
+              <label className="block text-gray-700 text-sm font-bold mb-1">
                 Confirme a senha
               </label>
-              <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 pr-10 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              <MaskedInput
                 id="confirmacaoSenha"
-                type="password"
                 placeholder="Digite novamente a senha"
                 name="confirmacaoSenha"
                 value={confirmacaoSenha}
-                onChange={handleConfirmaçãoSenha}
+                type="password"
+                customValidation={(value) => value === formData.senha}
+                errorMessage="As senhas não conferem"
+                onChange={(e) => setConfirmacaoSenha(e.target.value)}
+                required
+                hasIcon={false}
               />
             </div>
-            <div className="flex items-center justify-center mb-4">
+            <div className="flex justify-center">
               <button
-                className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ${
+                type="submit"
+                className={`inline-flex max-sm:w-full items-center justify-center gap-2 rounded-md bg-gradient-to-r from-[#07AFFF] to-[#0470AE] px-4 py-2 text-sm font-semibold text-white transition-all duration-300 hover:from-[#058EDC] hover:to-[#03598A] hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 ${
                   !isFormValid() ? "opacity-50 cursor-not-allowed" : ""
                 }`}
-                type="submit"
                 disabled={!isFormValid()}
               >
-                Próximo
+                Próximo <ArrowRight className="ml-2 h-5 w-5" />
               </button>
             </div>
           </form>

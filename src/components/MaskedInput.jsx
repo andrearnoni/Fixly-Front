@@ -1,20 +1,24 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { Mail, Lock } from "lucide-react";
 
 const MaskedInput = ({
   id,
-  label,
   placeholder,
   name,
   value,
   type = "text",
-  mask,
   validationPattern,
   errorMessage,
+  mask,
+  customValidation,
   onChange,
+  required = false,
+  showErrorForcefully = false,
+  hasIcon,
+  eyesIcon,
 }) => {
-  const [isValid, setIsValid] = useState(true);
   const [showError, setShowError] = useState(false);
-  const [isEmpty, setIsEmpty] = useState(true);
+  const [hasChanged, setHasChanged] = useState(false);
 
   const applyMask = (rawValue, maskType) => {
     let maskedValue =
@@ -65,6 +69,9 @@ const MaskedInput = ({
   };
 
   const validateInput = (inputValue) => {
+    if (typeof customValidation === "function") {
+      return customValidation(inputValue);
+    }
     if (!validationPattern) return true;
     const regex = new RegExp(validationPattern);
     return regex.test(inputValue);
@@ -81,16 +88,19 @@ const MaskedInput = ({
       },
     });
 
-    setIsEmpty(maskedValue === "");
+    setHasChanged(true);
+
+    if (!maskedValue) {
+      setShowError(false);
+    }
   };
 
   const handleBlur = () => {
-    if (value === "") {
-      setShowError(false);
-    } else {
+    if (hasChanged && value) {
       const valid = validateInput(value);
-      setIsValid(valid);
       setShowError(!valid);
+    } else {
+      setShowError(false);
     }
   };
 
@@ -98,19 +108,24 @@ const MaskedInput = ({
     setShowError(false);
   };
 
+  const shouldShowError =
+    (showError && hasChanged && value) ||
+    (showErrorForcefully && !value && required);
+
+  const iconVisible =
+    typeof hasIcon === "boolean"
+      ? hasIcon
+      : type === "email" || type === "password";
+
   return (
-    <div className="mb-4">
-      <label
-        className="block text-gray-700 text-sm font-bold mb-2"
-        htmlFor={id}
-      >
-        {label}
-      </label>
+    <div className="relative">
+      {iconVisible && type === "email" ? (
+        <Mail className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+      ) : (iconVisible && type === "password") || (eyesIcon && hasIcon) ? (
+        <Lock className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+      ) : null}
       <input
         id={id}
-        className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
-          !isValid && !isEmpty && showError ? "border-red-500 border-[3px]" : ""
-        }`}
         type={type}
         placeholder={placeholder}
         name={name}
@@ -118,8 +133,13 @@ const MaskedInput = ({
         onChange={handleChange}
         onBlur={handleBlur}
         onFocus={handleFocus}
+        className={`flex h-10 w-full rounded-md border border-input bg-white/50 px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2
+        ${iconVisible ? "pl-10" : "pl-3"} 
+        ${shouldShowError ? "border-red-500 border-[3px]" : ""}
+        ${eyesIcon === true ? "pr-10" : ""}`}
+        noValidate
       />
-      {showError && (
+      {shouldShowError && (
         <p className="text-red-500 text-xs italic mt-2">{errorMessage}</p>
       )}
     </div>

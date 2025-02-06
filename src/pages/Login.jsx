@@ -1,29 +1,40 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import LinkLoading from "../components/LinkLoading";
+import { ArrowLeft, Eye, EyeOff, ArrowRight } from "lucide-react";
 import logo2 from "../img/logo2.png";
-import { FaEye, FaEyeSlash, FaArrowLeft } from "react-icons/fa";
 import video from "../img/trabalhadores.gif";
+import MaskedInput from "../components/MaskedInput";
 
 function Login() {
   const [senhaVisivel, setSenhaVisivel] = useState(false);
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+  const [showErrors, setShowErrors] = useState(false);
 
   const handleReturn = () => {
     window.history.back();
   };
 
-  const mudarVisibilidade = () => {
-    setSenhaVisivel(!senhaVisivel);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setShowErrors(true);
+    const isEmailValid =
+      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
+    const isSenhaValid = senha.length >= 6;
+    if (!isEmailValid || !isSenhaValid) {
+      return;
+    }
   };
 
   return (
-    <div className="flex items-center justify-center h-screen p-4">
-      <div className="flex flex-col lg:flex-row lg:bg-[#FCFCFB] sm:bg-white rounded-lg w-full max-w-md lg:max-w-2xl relative lg:shadow-lg">
+    <div className="flex items-center justify-center h-screen p-4 bg-white sm:bg-gradient-to-br sm:from-white sm:to-blue-200">
+      <div className="flex flex-col lg:flex-row lg:bg-[#FCFCFB] lg:rounded-2xl lg:shadow-lg w-full max-w-md lg:max-w-2xl relative">
         <button
           onClick={handleReturn}
           className="absolute top-4 left-4 text-gray-400 hover:text-gray-900 focus:outline-none"
           aria-label="Voltar"
         >
-          <FaArrowLeft className="w-6 h-6" />
+          <ArrowLeft className="w-6 h-6" />
         </button>
 
         <aside className="hidden lg:block lg:w-1/2">
@@ -33,78 +44,108 @@ function Login() {
             className="w-full h-full p-14 object-cover rounded-l-lg"
           />
         </aside>
+
         <main className="w-full lg:w-1/2 p-8">
-          <div>
+          <div className="mb-8 text-center">
             <img src={logo2} alt="Logo" className="w-20 mx-auto mb-4" />
-          </div>
-          <div className="mb-4 text-center">
-            <h2 className="text-xl font-bold text-balance">
+            <p className="mt-2 text-lg text-gray-600">
               Já é cliente? Acesse sua conta
-            </h2>
+            </p>
           </div>
-          <form>
-            <div className="mb-4">
+
+          <form className="space-y-6" onSubmit={handleSubmit} noValidate>
+            <div>
               <label
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block text-gray-700 text-sm font-bold mb-1"
                 htmlFor="email"
               >
                 Email
               </label>
-              <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              <MaskedInput
                 id="email"
-                type="email"
                 placeholder="Digite seu email"
+                name="email"
+                value={email}
+                type="email"
+                mask="email"
+                validationPattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                errorMessage="Email inválido"
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                showErrorForcefully={showErrors && !email}
               />
             </div>
-            <div className="mb-4 relative">
-              <label
-                className="block text-gray-700 text-sm font-bold mb-2"
-                htmlFor="senha"
-              >
+            <div>
+              <label className="block text-gray-700 text-sm font-bold mb-1">
                 Senha
               </label>
-              <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 pr-10 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="senha"
-                type={senhaVisivel ? "text" : "password"}
-                placeholder="Digite sua senha"
-              />
-              <button
-                type="button"
-                className="absolute bottom-[0.7rem] right-0 pr-3 flex items-center text-gray-600"
-                onClick={mudarVisibilidade}
-              >
-                {senhaVisivel ? <FaEyeSlash /> : <FaEye />}
-              </button>
+              <div className="relative">
+                <MaskedInput
+                  id="senha"
+                  placeholder="Digite sua senha"
+                  name="senha"
+                  value={senha}
+                  type={senhaVisivel ? "text" : "password"}
+                  validationPattern=".{6,}"
+                  errorMessage="Senha deve ter pelo menos 6 caracteres"
+                  onChange={(e) => setSenha(e.target.value)}
+                  required
+                  showErrorForcefully={showErrors && !senha}
+                  hasIcon={true}
+                  eyesIcon={true}
+                />
+                <button
+                  type="button"
+                  onClick={() => setSenhaVisivel(!senhaVisivel)}
+                  className="absolute right-3 top-3 text-gray-400 hover:text-gray-600"
+                >
+                  {senhaVisivel ? (
+                    <EyeOff className="h-5 w-5" />
+                  ) : (
+                    <Eye className="h-5 w-5" />
+                  )}
+                </button>
+              </div>
             </div>
-            <div className="mb-4 flex items-center justify-between">
+
+            <div className="flex justify-between text-sm">
               <LinkLoading
                 to="/esqueci-a-senha"
-                className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
+                className="text-[#07AFFF] hover:text-[#058edc] transition-colors"
               >
                 Esqueceu sua senha?
               </LinkLoading>
               <LinkLoading
                 to="/cadastro"
-                className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
+                className="text-[#07AFFF] hover:text-[#058edc] transition-colors"
               >
                 Criar conta
               </LinkLoading>
             </div>
-            <div className="mb-4">
-              <button
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
-                type="button"
-              >
-                Entrar
-              </button>
+
+            <button
+              type="submit"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-gradient-to-r from-[#07AFFF] to-[#0470AE] px-4 py-2 text-sm font-semibold text-white transition-all duration-300 hover:from-[#058EDC] hover:to-[#03598A] hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+            >
+              Entrar
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </button>
+
+            <div className="relative my-6">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-gray-300"></div>
+              </div>
+              <div className="relative flex justify-center text-sm">
+                <span className="px-2 bg-white lg:bg-[#FCFCFB] text-gray-500">
+                  Ou acesse com
+                </span>
+              </div>
             </div>
-            <div className="text-center text-gray-600 mb-4">Ou acesse com</div>
-            <div className="flex justify-between space-x-4">
+
+            <div className="grid grid-cols-2 gap-4">
               <button
-                className="inline-flex items-center bg-white border border-gray-300 text-gray-700 font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline hover:bg-gray-100"
                 type="button"
+                className="inline-flex items-center justify-center gap-2 rounded-md border border-input bg-background px-4 py-2 text-sm font-medium ring-offset-background transition-colors hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
               >
                 <img
                   src="https://img.icons8.com/color/16/000000/google-logo.png"
@@ -114,8 +155,8 @@ function Login() {
                 Google
               </button>
               <button
-                className="inline-flex items-center bg-white border border-gray-300 text-gray-700 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:bg-gray-100"
                 type="button"
+                className="inline-flex items-center justify-center gap-2 rounded-md border border-input bg-background px-4 py-2 text-sm font-medium ring-offset-background transition-colors hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
               >
                 <img
                   src="https://img.icons8.com/?size=18&id=118497&format=png&color=000000"
