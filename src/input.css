@@ -16,18 +16,24 @@ body {
   }
 }
 
-.swiper-pagination {
-  color: #07AFFF;
+.swiper-pagination,
+.swiper-button-next,
+.swiper-button-prev {
+  color: #07afff;
 }
 
-.swiper-button-prev, .swiper-button-next {
-  color: #07AFFF;
-}
-
-.swiper-button-prev::after {
-  font-size: 10px;
-}
-
+.swiper-button-prev::after,
 .swiper-button-next::after {
   font-size: 10px;
+}
+
+@font-face {
+  font-family: "Helvetica";
+  src: url("/src/fonts/helvetica/Helvetica.ttf") format("ttf");
+  font-weight: bold;
+  font-style: normal;
+}
+
+html {
+  font-family: "Helvetica", sans-serif;
 }
