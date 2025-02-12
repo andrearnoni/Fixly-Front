@@ -6,6 +6,7 @@ import Reviews from "../components/Reviews";
 import HowItWorks from "../components/HowItWorks";
 import Partners from "../components/Partners";
 import VideoEmbed from "../components/VideoEmbed";
+import Footer from "../components/Footer";
 
 function Home() {
   const { isLoading } = useContext(Context);
@@ -18,6 +19,7 @@ function Home() {
       <Reviews />
       <Partners />
       <VideoEmbed />
+      <Footer />
     </>
   );
 }
