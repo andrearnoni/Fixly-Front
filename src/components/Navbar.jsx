@@ -27,7 +27,7 @@ function Navbar() {
     >
       <div className="max-w-screen-xl flex items-center justify-between mx-auto p-4">
         <Link to="#" className="flex items-center">
-          <img src={logo} alt="Logo FixLy" className="h-11" />
+          <img src={logo} alt="logo fixLy" className="h-11" />
         </Link>
         <div className="flex items-center space-x-3 md:order-2">
           <LinkLoading
@@ -76,7 +76,7 @@ function Navbar() {
             <li>
               <Link
                 to="#"
-                className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#07AFFF]"
+                className="block py-2 px-3 text-gray-900 md:hover:text-[#07AFFF]"
                 onClick={() => handleScrollToSection("comoFunciona")}
               >
                 Como Funciona?
@@ -85,7 +85,7 @@ function Navbar() {
             <li>
               <Link
                 to="#inicio"
-                className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#07AFFF]"
+                className="block py-2 px-3 text-gray-900 md:hover:text-[#07AFFF]"
               >
                 Início
               </Link>
@@ -93,7 +93,7 @@ function Navbar() {
             <li>
               <Link
                 to="#servicos"
-                className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#07AFFF]"
+                className="block py-2 px-3 text-gray-900 md:hover:text-[#07AFFF]"
               >
                 Serviços
               </Link>
@@ -101,7 +101,7 @@ function Navbar() {
             <li>
               <Link
                 to="#contato"
-                className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#07AFFF]"
+                className="block py-2 px-3 text-gray-900 md:hover:text-[#07AFFF]"
               >
                 Contato
               </Link>

@@ -37,7 +37,7 @@ function Login() {
           <ArrowLeft className="w-6 h-6" />
         </button>
 
-        <aside className="hidden lg:block lg:w-1/2">
+        <aside className="hidden lg:block lg:w-1/2 bg-[#FDFDFD]">
           <img
             src={video}
             alt="Login Visual"

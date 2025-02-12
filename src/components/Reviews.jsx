@@ -201,8 +201,6 @@ function Reviews() {
               </div>
             ))}
           </div>
-          <div className="reviews-swiper-button-next swiper-button-next"></div>
-          <div className="reviews-swiper-button-prev swiper-button-prev"></div>
           <div
             className="reviews-swiper-pagination swiper-pagination"
             style={{
