@@ -104,37 +104,37 @@ const Footer = () => {
             <div className="flex space-x-6">
               <a
                 href="#"
-                className="text-gray-600 hover:text-gray-900 transition-colors duration-200"
+                className="text-gray-600 hover:text-gray-900 transition-transform duration-300 ease-in-out hover:scale-[1.12]"
               >
                 <img src={facebook} className="h-5 w-5" />
               </a>
               <a
                 href="#"
-                className="text-gray-600 hover:text-gray-900 transition-colors duration-200"
+                className="text-gray-600 hover:text-gray-900 transition-transform duration-300 ease-in-out hover:scale-[1.12]"
               >
                 <img src={instagram} className="h-5 w-5" />
               </a>
               <a
                 href="#"
-                className="text-gray-600 hover:text-gray-900 transition-colors duration-200"
+                className="text-gray-600 hover:text-gray-900 transition-transform duration-300 ease-in-out hover:scale-[1.12]"
               >
                 <img src={tiktok} className="h-5 w-5" />
               </a>
               <a
                 href="#"
-                className="text-gray-600 hover:text-gray-900 transition-colors duration-200"
+                className="text-gray-600 hover:text-gray-900 transition-transform duration-300 ease-in-out hover:scale-[1.12]"
               >
                 <img src={linkedin} className="h-5 w-5" />
               </a>
               <a
                 href="#"
-                className="text-gray-600 hover:text-gray-900 transition-colors duration-200"
+                className="text-gray-600 hover:text-gray-900 transition-transform duration-300 ease-in-out hover:scale-[1.12]"
               >
                 <img src={twitter} className="h-5 w-5" />
               </a>
               <a
                 href="#"
-                className="text-gray-600 hover:text-gray-900 transition-colors duration-200"
+                className="text-gray-600 hover:text-gray-900 transition-transform duration-300 ease-in-out hover:scale-[1.12]"
               >
                 <img src={pinterest} className="h-5 w-5" />
               </a>
