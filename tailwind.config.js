@@ -27,6 +27,9 @@ export default {
       animation: {
         "spin-slow": "spin 3s linear infinite",
       },
+      fontSize: {
+        "xxs": "0.625rem"
+      }
     },
   },
   plugins: [

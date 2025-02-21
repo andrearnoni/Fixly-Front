@@ -11,6 +11,7 @@ import CreateAccount from "./pages/CreateAccount";
 import ForgottenPasword from "./pages/ForgottenPasword";
 import CreateNewPassword from "./pages/CreateNewPassword";
 import Error from "./pages/Error";
+import HomeUser from "./pages/HomeUser"
 
 const AppContent = () => {
   const { isLoading } = useContext(Context);
@@ -24,6 +25,7 @@ const AppContent = () => {
         <Route path="/cadastro/*" element={<CreateAccount />} />
         <Route path="/esqueci-a-senha" element={<ForgottenPasword />} />
         <Route path="/resetar-senha" element={<CreateNewPassword />} />
+        <Route path="/tela-inicial-usuario" element={<HomeUser />} />
         <Route path="*" element={<Error />} />
       </Routes>
     </>

@@ -11,6 +11,10 @@ function GlobalContext({ children }) {
   const [tipoUsuario, setTipoUsuario] = useState("cliente");
   const [termosAceitos, setTermosAceitos] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const login = () => setIsLoggedIn(true);
+  const logout = () => setIsLoggedIn(false);
 
   const startLoading = () => {
     setIsLoading(true);
@@ -54,6 +58,9 @@ function GlobalContext({ children }) {
     setFormData,
     isLoading,
     startLoading,
+    isLoggedIn,
+    login,
+    logout
   };
 
   return <Context.Provider value={Object}>{children}</Context.Provider>;
