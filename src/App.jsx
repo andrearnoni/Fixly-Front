@@ -26,7 +26,7 @@ function AppContent() {
         <Route path="/cadastro/*" element={<CreateAccount />} />
         <Route path="/esqueci-a-senha" element={<ForgottenPassword />} />
         <Route path="/resetar-senha" element={<CreateNewPassword />} />
-        <Route path="/dashboard" element={<Dashboard/>}/>
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="*" element={<Error />} />
       </Routes>
       <ChatBot />
