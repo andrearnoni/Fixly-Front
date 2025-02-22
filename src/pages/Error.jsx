@@ -1,11 +1,10 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
 function Error() {
   return (
     <div className="flex items-center justify-center h-screen px-6 py-24 sm:py-32 lg:px-8">
       <div className="text-center">
-        <p className="text-6xl font-semibold text-blue-500">404</p>
+        <p className="text-6xl font-semibold text-[#07AFFF]">404</p>
         <h1 className="mt-4 text-balance text-5xl font-semibold tracking-tight text-gray-900 sm:text-7xl">
           Página não encontrada
         </h1>
@@ -16,7 +15,7 @@ function Error() {
         <div className="mt-10 flex items-center justify-center gap-x-6">
           <Link
             to="/"
-            className="bg-blue-500 py-2 px-4 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 rounded focus:outline-none focus:shadow-outline"
+            className="text-white bg-gradient-to-r from-[#07AFFF] to-[#0470AE] transition-colors hover:from-[#058EDC] hover:to-[#03598A] focus:outline-none font-semibold rounded-xl text-sm px-4 py-2"
           >
             Voltar para a página principal
           </Link>

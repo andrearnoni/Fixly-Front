@@ -1,14 +1,15 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Context } from "../context/GlobalContext";
+import Context from "../context/Context";
 
 const LinkWithLoading = ({ to, children, ...props }) => {
-  const { startLoading } = useContext(Context);
+  const { startLoading, setChatOpen } = useContext(Context);
   const navigate = useNavigate();
 
   const handleClick = (e) => {
     e.preventDefault();
     startLoading();
+    setChatOpen(false);
     setTimeout(() => {
       navigate(to);
     }, 100);
