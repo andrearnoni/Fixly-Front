@@ -79,7 +79,7 @@ function SideBar({ toggleDarkMode, isDarkMode }) {
             <nav className="space-y-3 mt-2">
               <a
                 href="#"
-                className={`flex items-center space-x-2 py-2 px-4 hover:bg-gray-200 rounded text-base ${
+                className={`flex items-center space-x-2 py-2 px-4 hover:bg-gray-200 rounded text-base hover:text-black ${
                   isDarkMode ? "text-gray-300" : "text-gray-900"
                 }`}
               >
@@ -88,7 +88,7 @@ function SideBar({ toggleDarkMode, isDarkMode }) {
               </a>
               <a
                 href="#"
-                className={`flex items-center space-x-2 py-2 px-4 hover:bg-gray-200 rounded text-base ${
+                className={`flex items-center space-x-2 py-2 px-4 hover:bg-gray-200 rounded text-base hover:text-black ${
                   isDarkMode ? "text-gray-300" : "text-gray-900"
                 }`}
               >
@@ -97,7 +97,7 @@ function SideBar({ toggleDarkMode, isDarkMode }) {
               </a>
               <a
                 href="#"
-                className={`flex items-center space-x-2 py-2 px-4 hover:bg-gray-200 rounded text-base ${
+                className={`flex items-center space-x-2 py-2 px-4 hover:bg-gray-200 rounded text-base hover:text-black ${
                   isDarkMode ? "text-gray-300" : "text-gray-900"
                 }`}
               >
@@ -106,7 +106,7 @@ function SideBar({ toggleDarkMode, isDarkMode }) {
               </a>
               <a
                 href="#"
-                className={`flex items-center space-x-2 py-2 px-4 hover:bg-gray-200 rounded text-base ${
+                className={`flex items-center space-x-2 py-2 px-4 hover:bg-gray-200 rounded text-base hover:text-black ${
                   isDarkMode ? "text-gray-300" : "text-gray-900"
                 }`}
               >
@@ -130,7 +130,7 @@ function SideBar({ toggleDarkMode, isDarkMode }) {
             <nav className="space-y-3 mt-2">
               <a
                 href="#"
-                className={`flex items-center space-x-2 py-2 px-4 hover:bg-gray-200 rounded text-base ${
+                className={`flex items-center space-x-2 py-2 px-4 hover:bg-gray-200 rounded text-base hover:text-black ${
                   isDarkMode ? "text-gray-300" : "text-gray-900"
                 }`}
               >
@@ -139,7 +139,7 @@ function SideBar({ toggleDarkMode, isDarkMode }) {
               </a>
               <a
                 href="#"
-                className={`flex items-center space-x-2 py-2 px-4 hover:bg-gray-200 rounded text-base ${
+                className={`flex items-center space-x-2 py-2 px-4 hover:bg-gray-200 rounded text-base hover:text-black ${
                   isDarkMode ? "text-gray-300" : "text-gray-900"
                 }`}
               >
@@ -148,7 +148,7 @@ function SideBar({ toggleDarkMode, isDarkMode }) {
               </a>
               <a
                 href="#"
-                className={`flex items-center space-x-2 py-2 px-4 hover:bg-gray-200 rounded text-base ${
+                className={`flex items-center space-x-2 py-2 px-4 hover:bg-gray-200 rounded text-base hover:text-black ${
                   isDarkMode ? "text-gray-300" : "text-gray-900"
                 }`}
               >
