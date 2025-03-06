@@ -13,6 +13,7 @@ import "./input.css";
 import { useContext } from "react";
 import Context from "./context/Context";
 import Dashboard from "./pages/Dashboard";
+import Payment from "./pages/Payment";
 
 function AppContent() {
   const { isLoading } = useContext(Context);
@@ -27,6 +28,7 @@ function AppContent() {
         <Route path="/esqueci-a-senha" element={<ForgottenPassword />} />
         <Route path="/resetar-senha" element={<CreateNewPassword />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/pagamento" element={<Payment />} />
         <Route path="*" element={<Error />} />
       </Routes>
       <ChatBot />
