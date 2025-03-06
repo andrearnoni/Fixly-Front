@@ -40,7 +40,6 @@ function App() {
   return (
     <GlobalContext>
       <Router>
-        <ScrollToTop smooth={true} />
         <AppContent />
       </Router>
     </GlobalContext>
