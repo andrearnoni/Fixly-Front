@@ -14,6 +14,7 @@ import { useContext } from "react";
 import Context from "./context/Context";
 import Dashboard from "./pages/Dashboard";
 import EditUser from "./pages/EditUser";
+import Payment from "./pages/Payment";
 
 function AppContent() {
   const { isLoading } = useContext(Context);
@@ -29,6 +30,7 @@ function AppContent() {
         <Route path="/resetar-senha" element={<CreateNewPassword />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/editar-usuario" element={<EditUser />} />
+        <Route path="/pagamento" element={<Payment />} />
         <Route path="*" element={<Error />} />
       </Routes>
       <ChatBot />
@@ -40,7 +42,6 @@ function App() {
   return (
     <GlobalContext>
       <Router>
-        <ScrollToTop smooth={true} />
         <AppContent />
       </Router>
     </GlobalContext>
