@@ -14,17 +14,13 @@ const Footer = () => {
     {
       title: "Categorias",
       links: [
-        "Alimentação",
-        "Transporte",
-        "E-commerce",
-        "Desenvolvimento de site",
-        "Desenvolvimento de app",
-        "Turismo",
-        "Educação",
-        "Financeiro",
-        "Social",
-        "Entretenimento",
-        "Imobiliário",
+        "Construção",
+        "Manutenção",
+        "Limpeza",
+        "Dedetização",
+        "Pintura",
+        "Instalação",
+        "Beleza",
       ],
     },
     {
@@ -32,37 +28,21 @@ const Footer = () => {
       links: [
         "Como usar a fixLy",
         "Meu perfil",
-        "Categoria x",
         "Ver depoimentos",
         "Fazer meu cadastro",
-        "Segurança e rapidez",
-        "Melhores serviços",
-        "Categoria A",
       ],
     },
     {
       title: "Para profissionais",
-      links: [
-        "Sou profissional",
-        "Serviços",
-        "Mapa de sucesso",
-        "Outros profissionais",
-        "Fazer meu cadastro",
-        "Segurança e rapidez",
-        "Como atrair clientes",
-      ],
+      links: ["Sou profissional", "Serviços", "Fazer meu cadastro"],
     },
     {
       title: "fixLy",
       links: [
         "Quem somos",
-        "Nossa história",
         "Política de privacidade",
         "Termos de uso",
-        "Ajuda e suporte",
         "Fale conosco",
-        "Redes sociais",
-        "Outra categoria",
       ],
     },
   ];
@@ -73,12 +53,12 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8 text-center">
           {footerSections.map((section, index) => (
             <div key={index} className="space-y-4">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4 text-left">
                 {section.title}
               </h3>
               <ul className="space-y-2">
                 {section.links.map((link, linkIndex) => (
-                  <li key={linkIndex}>
+                  <li className="text-left" key={linkIndex}>
                     <a
                       href="#"
                       className="text-gray-900 hover:text-[#07AFFF] transition-colors duration-200 text-sm"

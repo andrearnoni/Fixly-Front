@@ -19,10 +19,10 @@ export const isStep2Complete = (formData, tipoUsuario) => {
 
   if (!baseComplete) return false;
 
-  if (tipoUsuario === "cliente") {
+  if (tipoUsuario === "CLIENTE") {
     return !!formData.cpfCnpj;
-  } else if (tipoUsuario === "prestador") {
-    return !!formData.cpfCnpj && !!formData.especialidade;
+  } else if (tipoUsuario === "PRESTADOR") {
+    return !!formData.cpfCnpj;
   }
   return false;
 };

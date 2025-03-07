@@ -124,9 +124,9 @@ const CreateAccountStep1 = () => {
                   <input
                     type="radio"
                     name="tipoUsuario"
-                    value="cliente"
+                    value="CLIENTE"
                     onChange={handleChange}
-                    checked={formData.tipoUsuario === "cliente"}
+                    checked={formData.tipoUsuario === "CLIENTE"}
                   />
                   Quero contratar um serviço
                 </label>
@@ -134,9 +134,9 @@ const CreateAccountStep1 = () => {
                   <input
                     type="radio"
                     name="tipoUsuario"
-                    value="prestador"
+                    value="PRESTADOR"
                     onChange={handleChange}
-                    checked={formData.tipoUsuario === "prestador"}
+                    checked={formData.tipoUsuario === "PRESTADOR"}
                   />
                   Quero me registrar como prestador de serviços
                 </label>
