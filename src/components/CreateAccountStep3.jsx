@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Context from "../context/Context";
 import TermosCondicoes from "./TermosECondicoes";
-import { salvarCadastroLocalStorage } from "../services/RegistrationService";
+import { createNewUser } from "../api/CreateNewUserApi";
 import { ArrowLeft } from "lucide-react";
 import logo2 from "../img/logo2.png";
 import Swal from "sweetalert2";
@@ -14,6 +14,7 @@ const CreateAccountStep3 = () => {
     setTermosAceitos,
     formData,
     resetRegistration,
+    startLoading,
   } = useContext(Context);
   const navigate = useNavigate();
 
@@ -21,21 +22,35 @@ const CreateAccountStep3 = () => {
     setTermosAceitos((prev) => !prev);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    salvarCadastroLocalStorage(formData);
-    setStepCompleto(false);
-    Swal.fire({
-      icon: "success",
-      title: "Conta criada com sucesso!",
-      showConfirmButton: false,
-      backdrop: "rgba(0, 0, 0, 0.4)",
-      timer: 2500,
-    });
-    resetRegistration();
-    setTimeout(() => {
-      navigate("/");
-    }, 2500);
+    try {
+      startLoading();
+      await createNewUser(formData);
+      setStepCompleto(false);
+      Swal.fire({
+        icon: "success",
+        title: "Conta criada com sucesso!",
+        showConfirmButton: false,
+        backdrop: "rgba(0, 0, 0, 0.4)",
+        timer: 2500,
+      });
+      resetRegistration();
+      setTimeout(() => {
+        navigate("/");
+      }, 2500);
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Erro ao criar conta",
+        text:
+          error.message ||
+          "Não foi possível cadastrar o usuário. Tente novamente mais tarde.",
+        confirmButtonText: "OK",
+        backdrop: "rgba(0, 0, 0, 0.4)",
+      });
+      console.error("Erro ao criar conta:", error);
+    }
   };
 
   return (

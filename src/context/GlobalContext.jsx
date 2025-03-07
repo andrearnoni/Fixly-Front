@@ -4,16 +4,18 @@ import Context from "./Context";
 const defaultFormData = {
   nome: "",
   email: "",
+  tipoUsuario: "",
   senha: "",
   nascimento: "",
   cpfCnpj: "",
   cep: "",
   endereco: "",
   numero: "",
+  complemento: "",
   bairro: "",
   cidade: "",
   estado: "",
-  especialidade: "",
+  principal: true,
 };
 
 function GlobalContext({ children }) {
@@ -22,7 +24,7 @@ function GlobalContext({ children }) {
   const [senhaVisivel, setSenhaVisivel] = useState(false);
   const [step, setStep] = useState(1);
   const [stepCompleto, setStepCompleto] = useState(false);
-  const [tipoUsuario, setTipoUsuario] = useState("cliente");
+  const [tipoUsuario, setTipoUsuario] = useState("CLIENTE");
   const [termosAceitos, setTermosAceitos] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState(defaultFormData);
@@ -39,7 +41,7 @@ function GlobalContext({ children }) {
     setFormData(defaultFormData);
     setStep(1);
     setStepCompleto(false);
-    setTipoUsuario("cliente");
+    setTipoUsuario("CLIENTE");
     setTermosAceitos(false);
   };
 

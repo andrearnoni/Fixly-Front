@@ -2,7 +2,6 @@ import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Context from "../context/Context";
 import MaskedInput from "../components/MaskedInput";
-// import axios from "axios";
 import { ArrowLeft, Eye, EyeOff, ArrowRight } from "lucide-react";
 import logo2 from "../img/logo2.png";
 
@@ -18,23 +17,6 @@ const CreateAccountStep1 = () => {
   const navigate = useNavigate();
   const [confirmacaoSenha, setConfirmacaoSenha] = useState("");
   const [senhaVisivel, setSenhaVisivel] = useState(false);
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await axios.post("http://localhost:8080/usuarios", {
-  //         nome: formData.nome,
-  //         email: formData.email,
-  //         senha: formData.senha,
-  //         tipoUsuario: formData.tipoUsuario,
-  //       });
-  //       console.log(response.data);
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   };
-  //   fetchData();
-  // }, [formData]);
 
   useEffect(() => {
     if (!formData.tipoUsuario) {
@@ -142,9 +124,9 @@ const CreateAccountStep1 = () => {
                   <input
                     type="radio"
                     name="tipoUsuario"
-                    value="cliente"
+                    value="CLIENTE"
                     onChange={handleChange}
-                    checked={formData.tipoUsuario === "cliente"}
+                    checked={formData.tipoUsuario === "CLIENTE"}
                   />
                   Quero contratar um serviço
                 </label>
@@ -152,9 +134,9 @@ const CreateAccountStep1 = () => {
                   <input
                     type="radio"
                     name="tipoUsuario"
-                    value="prestador"
+                    value="PRESTADOR"
                     onChange={handleChange}
-                    checked={formData.tipoUsuario === "prestador"}
+                    checked={formData.tipoUsuario === "PRESTADOR"}
                   />
                   Quero me registrar como prestador de serviços
                 </label>

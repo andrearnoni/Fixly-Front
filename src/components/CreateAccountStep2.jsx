@@ -29,9 +29,6 @@ const CreateAccountStep2 = () => {
     const bairroValido = !!formData.bairro;
     const cidadeValida = !!formData.cidade;
     const estadoValido = !!formData.estado;
-    const especialidadeValida =
-      tipoUsuario === "cliente" ||
-      (tipoUsuario === "prestador" && !!formData.especialidade);
 
     return (
       nascimentoValido &&
@@ -41,8 +38,7 @@ const CreateAccountStep2 = () => {
       numeroValido &&
       bairroValido &&
       cidadeValida &&
-      estadoValido &&
-      especialidadeValida
+      estadoValido
     );
   };
 
@@ -89,7 +85,7 @@ const CreateAccountStep2 = () => {
                   onChange={handleChange}
                 />
               </div>
-              {tipoUsuario === "cliente" ? (
+              {tipoUsuario === "CLIENTE" ? (
                 <div>
                   <label
                     className="block text-gray-700 text-sm font-bold mb-1"
@@ -275,34 +271,6 @@ const CreateAccountStep2 = () => {
                 </div>
               </div>
             </div>
-            {tipoUsuario === "prestador" && (
-              <div>
-                <label
-                  className="block text-gray-700 text-sm font-bold mb-1"
-                  htmlFor="especialidade"
-                >
-                  Especialidade do serviço
-                </label>
-                <div>
-                  <select
-                    className="flex h-10 w-full rounded-md border border-input bg-white/50 px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
-                    name="especialidade"
-                    id="especialidade"
-                    value={formData.especialidade}
-                    onChange={handleChange}
-                  >
-                    <option disabled value="">
-                      Selecione uma especialidade
-                    </option>
-                    <option value="Cabeleireiro">Jardineiro(a)</option>
-                    <option value="Barbeiro">Encanador(a)</option>
-                    <option value="Pintor">Pintor(a)</option>
-                    <option value="Aparelho de barba">Faxineiro(a)</option>
-                    <option value="Outro">Outro</option>
-                  </select>
-                </div>
-              </div>
-            )}
             <div className="flex items-center justify-between flex-wrap-reverse gap-4 my-4">
               <button
                 className="inline-flex max-sm:w-full items-center justify-center gap-2 rounded-md bg-gradient-to-l from-black/50 to-gray-700 px-4 py-2 text-sm font-semibold text-white transition-all duration-300 hover:from-black/60 hover:to-gray-800 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
