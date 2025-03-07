@@ -4,12 +4,18 @@ import { ArrowLeft, Eye, EyeOff, ArrowRight } from "lucide-react";
 import logo2 from "../img/logo2.png";
 import video from "../img/trabalhadores.gif";
 import MaskedInput from "../components/MaskedInput";
+import * as authService from "../services/auth-service";
 
 function Login() {
   const [senhaVisivel, setSenhaVisivel] = useState(false);
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [showErrors, setShowErrors] = useState(false);
+
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+  });
 
   const handleReturn = () => {
     window.history.back();
@@ -18,12 +24,29 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setShowErrors(true);
+    setEmail(e.target.value);
+    setSenha(e.target.value);
+    authService
+      .loginRequest(formData)
+      .then((response) => {
+        authService.saveAccessToken(response.data.access_token);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log("Erro no login", error);
+      });
     const isEmailValid =
       /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
     const isSenhaValid = senha.length >= 6;
     if (!isEmailValid || !isSenhaValid) {
       return;
     }
+  };
+
+  const handleInputChange = (e) => {
+    const value = e.target.value;
+    const name = e.target.name;
+    setFormData({ ...formData, [name]: value });
   };
 
   return (
@@ -64,13 +87,13 @@ function Login() {
               <MaskedInput
                 id="email"
                 placeholder="Digite seu email"
-                name="email"
-                value={email}
+                name="username"
+                value={formData.username}
                 type="email"
                 mask="email"
                 validationPattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
                 errorMessage="Email inválido"
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={handleInputChange}
                 required
                 showErrorForcefully={showErrors && !email}
               />
@@ -83,12 +106,12 @@ function Login() {
                 <MaskedInput
                   id="senha"
                   placeholder="Digite sua senha"
-                  name="senha"
-                  value={senha}
+                  name="password"
+                  value={formData.password}
                   type={senhaVisivel ? "text" : "password"}
                   validationPattern=".{6,}"
                   errorMessage="Senha deve ter pelo menos 6 caracteres"
-                  onChange={(e) => setSenha(e.target.value)}
+                  onChange={handleInputChange}
                   required
                   showErrorForcefully={showErrors && !senha}
                   hasIcon={true}
