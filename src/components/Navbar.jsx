@@ -100,7 +100,7 @@ function Navbar() {
             </li>
             <li>
               <Link
-                to="#contato"
+                to="/contato"
                 className="block py-2 px-3 text-gray-900 md:hover:text-[#07AFFF]"
               >
                 Contato
