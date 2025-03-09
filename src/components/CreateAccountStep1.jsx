@@ -22,7 +22,7 @@ const CreateAccountStep1 = () => {
     if (!formData.tipoUsuario) {
       setFormData({ ...formData, tipoUsuario });
     }
-  }, [formData, setFormData, tipoUsuario]);
+  }, [formData.tipoUsuario, setFormData, tipoUsuario]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

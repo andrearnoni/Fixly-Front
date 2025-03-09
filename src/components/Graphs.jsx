@@ -1,6 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import Context from "../context/Context";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import "highcharts/modules/accessibility";
 
 function Graphs({ isDarkMode }) {
   const [currentDate, setCurrentDate] = useState("");
@@ -10,6 +12,8 @@ function Graphs({ isDarkMode }) {
     bottomChartWidth: 0,
   });
   const [isMobile, setIsMobile] = useState(false);
+
+  const { infoUsuario } = useContext(Context);
 
   useEffect(() => {
     const updateDimensions = () => {
@@ -173,7 +177,7 @@ function Graphs({ isDarkMode }) {
     >
       <div className="space-y-3 mb-5 mt-12 md:mt-0">
         <h1 className="text-xl">
-          Bem vindo, <strong>Fulano!</strong>
+          Bem vindo, <strong>{`${infoUsuario?.nome.split(" ")[0]}!`}</strong>
         </h1>
         <p
           className={`text-sm ${
