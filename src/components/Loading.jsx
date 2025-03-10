@@ -1,4 +1,3 @@
-import React from "react";
 import { Drill, Paintbrush, Wrench, Hammer, Home } from "lucide-react";
 
 const LoadingSpinner = () => {

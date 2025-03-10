@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const testimonials = [
   {
@@ -146,10 +146,10 @@ function Reviews() {
 
   return (
     <section className="py-16 px-6 bg-gray-50" id="testemunhos">
-      <div className="max-w-7xl pb-10 mx-auto text-center text-balance">
+      <div className="max-w-7xl pb-12 mx-auto text-center text-balance">
         <h2 className="text-3xl font-semibold text-gray-800">
           Confiança e qualidade garantidas, com{" "}
-          <span className="text-blue-600 font-bold">avaliações positivas</span>{" "}
+          <span className="text-[#07AFFF] font-bold">avaliações positivas</span>{" "}
           de quem já usou nossos serviços
         </h2>
       </div>
@@ -187,7 +187,7 @@ function Reviews() {
                     <h5 className="text-lg font-bold text-gray-800 text-center">
                       {testimonial.name}
                     </h5>
-                    <h6 className="text-sm text-blue-500 text-center mb-4">
+                    <h6 className="text-sm text-[#07AFFF] text-center mb-4">
                       {testimonial.location}
                     </h6>
                     <p className="text-gray-600 text-center text-sm px-3 md:px-6 line-clamp-4">
@@ -201,8 +201,6 @@ function Reviews() {
               </div>
             ))}
           </div>
-          <div className="reviews-swiper-button-next swiper-button-next"></div>
-          <div className="reviews-swiper-button-prev swiper-button-prev"></div>
           <div
             className="reviews-swiper-pagination swiper-pagination"
             style={{

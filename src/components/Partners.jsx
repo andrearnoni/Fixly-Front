@@ -1,46 +1,56 @@
-import React from "react";
+import madeira from "../img/madeira.png";
+import casaCenter from "../img/casaCenter.png";
+import casaGrande from "../img/casaGrande.png";
+import construTudo from "../img/construTudo.png";
+import leroy from "../img/leroy.png";
+import pacheco from "../img/pacheco.png";
+import plaslimp from "../img/plaslimp.png";
+import telhanorte from "../img/telhanorte.png";
 
 const Partners = () => {
   const partners = [
     {
-      name: "Partner 1",
-      logo: "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=200&h=100&fit=crop&auto=format",
+      name: "Madeira Madeira",
+      logo: madeira,
     },
     {
-      name: "Partner 2",
-      logo: "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=200&h=100&fit=crop&auto=format",
+      name: "Casa Center",
+      logo: casaCenter,
     },
     {
-      name: "Partner 3",
-      logo: "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=200&h=100&fit=crop&auto=format",
+      name: "Casa Grande",
+      logo: casaGrande,
     },
     {
-      name: "Partner 4",
-      logo: "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=200&h=100&fit=crop&auto=format",
+      name: "Leroy Merlin",
+      logo: leroy,
     },
     {
-      name: "Partner 5",
-      logo: "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=200&h=100&fit=crop&auto=format",
+      name: "ConstruTudo",
+      logo: construTudo,
     },
     {
-      name: "Partner 6",
-      logo: "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=200&h=100&fit=crop&auto=format",
+      name: "Pacheco e Lacerda",
+      logo: pacheco,
     },
     {
-      name: "Partner 7",
-      logo: "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=200&h=100&fit=crop&auto=format",
+      name: "Telha Norte",
+      logo: telhanorte,
     },
     {
-      name: "Partner 8",
-      logo: "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=200&h=100&fit=crop&auto=format",
+      name: "Plaslimp",
+      logo: plaslimp,
     },
   ];
 
   return (
     <section className="py-16 px-6 md:px-8 bg-white">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-semibold mb-4 text-blue-600 text-center">
-          Empresas que confiam em nossos serviços
+        <h2 className="text-3xl font-semibold text-gray-800 mb-12 text-center">
+          Parceiros que{" "}
+          <span className="text-[#07AFFF] font-bold">
+            confiam em nossos serviços
+          </span>{" "}
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-8 items-center">
           {partners.map((partner, index) => (

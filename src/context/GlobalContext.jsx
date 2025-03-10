@@ -1,6 +1,20 @@
-import React, { createContext, useState } from "react";
+import { useState } from "react";
+import Context from "./Context";
 
-export const Context = createContext();
+const defaultFormData = {
+  nome: "",
+  email: "",
+  senha: "",
+  nascimento: "",
+  cpfCnpj: "",
+  cep: "",
+  endereco: "",
+  numero: "",
+  bairro: "",
+  cidade: "",
+  estado: "",
+  especialidade: "",
+};
 
 function GlobalContext({ children }) {
   const [clientes, setClientes] = useState([]);
@@ -11,6 +25,8 @@ function GlobalContext({ children }) {
   const [tipoUsuario, setTipoUsuario] = useState("cliente");
   const [termosAceitos, setTermosAceitos] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [formData, setFormData] = useState(defaultFormData);
+  const [chatOpen, setChatOpen] = useState(false);
 
   const startLoading = () => {
     setIsLoading(true);
@@ -19,23 +35,17 @@ function GlobalContext({ children }) {
     }, 3000);
   };
 
-  const [formData, setFormData] = useState({
-    nome: "",
-    email: "",
-    senha: "",
-    telefone: "",
-    nascimento: "",
-    cpfCnpj: "",
-    cep: "",
-    endereco: "",
-    numero: "",
-    bairro: "",
-    cidade: "",
-    estado: "",
-    especialidade: "",
-  });
+  const resetRegistration = () => {
+    setFormData(defaultFormData);
+    setStep(1);
+    setStepCompleto(false);
+    setTipoUsuario("cliente");
+    setTermosAceitos(false);
+  };
 
-  const Object = {
+  const toggleChat = () => setChatOpen(!chatOpen);
+
+  const value = {
     clientes,
     setClientes,
     profissionais,
@@ -54,9 +64,13 @@ function GlobalContext({ children }) {
     setFormData,
     isLoading,
     startLoading,
+    resetRegistration,
+    chatOpen,
+    setChatOpen,
+    toggleChat
   };
 
-  return <Context.Provider value={Object}>{children}</Context.Provider>;
+  return <Context.Provider value={value}>{children}</Context.Provider>;
 }
 
 export default GlobalContext;

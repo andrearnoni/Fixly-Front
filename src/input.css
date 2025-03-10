@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 html {
-  scroll-behavior: smooth;
+  font-family: "Helvetica", sans-serif;
 }
 
 body {
@@ -32,8 +32,4 @@ body {
   src: url("/src/fonts/helvetica/Helvetica.ttf") format("ttf");
   font-weight: bold;
   font-style: normal;
-}
-
-html {
-  font-family: "Helvetica", sans-serif;
 }

@@ -1,48 +1,24 @@
-import React, { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import Context from "../context/Context";
+import { ArrowLeft, Eye, EyeOff } from "lucide-react";
+import MaskedInput from "../components/MaskedInput";
+import Swal from "sweetalert2";
 import logo2 from "../img/logo2.png";
 import video from "../img/trabalhadores.gif";
-import { FaEye, FaEyeSlash, FaArrowLeft } from "react-icons/fa";
-import Swal from "sweetalert2";
 
-function ResetPassword() {
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [isPasswordValid, setIsPasswordValid] = useState(true);
-  const [doPasswordsMatch, setDoPasswordsMatch] = useState(true);
-  const [senhaVisivel, setSenhaVisivel] = useState(false);
-  const [confirmSenhaVisivel, setConfirmSenhaVisivel] = useState(false);
+function CreateNewPassword() {
+  const { formData, setFormData } = useContext(Context);
+
   const navigate = useNavigate();
 
-  const handleReturn = () => {
-    window.history.back();
-  };
+  const [confirmacaoSenha, setConfirmacaoSenha] = useState("");
+  const [senhaVisivel, setSenhaVisivel] = useState(false);
+  const [senhaConfirmaVisivel, setSenhaConfirmaVisivel] = useState(false);
 
-  const mudarVisibilidadeSenha = () => {
-    setSenhaVisivel(!senhaVisivel);
-  };
-
-  const mudarVisibilidadeConfirmSenha = () => {
-    setConfirmSenhaVisivel(!confirmSenhaVisivel);
-  };
-
-  const validatePassword = (password) => {
-    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,}$/;
-    return regex.test(password);
-  };
-
-  const handlePasswordChange = (e) => {
-    const inputPassword = e.target.value;
-    setPassword(inputPassword);
-    const isValid = validatePassword(inputPassword);
-    setIsPasswordValid(isValid);
-    setDoPasswordsMatch(inputPassword === confirmPassword);
-  };
-
-  const handleConfirmPasswordChange = (e) => {
-    const inputConfirmPassword = e.target.value;
-    setConfirmPassword(inputConfirmPassword);
-    setDoPasswordsMatch(password === inputConfirmPassword);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = (e) => {
@@ -51,24 +27,31 @@ function ResetPassword() {
       icon: "success",
       title: "Senha redefinida com sucesso!",
       showConfirmButton: false,
-      backdrop: "rgba(0, 0, 0, 0.4)",
-      timer: 2500,
+      timer: 2000,
     });
     setTimeout(() => {
       navigate("/login");
-    }, 2500);
+    }, 2000);
+  };
+
+  const isFormValid = () => {
+    const senhaValida = formData.senha && formData.senha.length >= 6;
+    const senhasIguais = formData.senha === confirmacaoSenha;
+
+    return senhaValida && senhasIguais;
   };
 
   return (
-    <div className="flex items-center justify-center h-screen p-4">
-      <div className="flex flex-col lg:flex-row lg:bg-[#FCFCFB] sm:bg-white rounded-lg w-full max-w-md lg:max-w-2xl relative lg:shadow-lg">
+    <div className="flex items-center justify-center h-screen p-4 bg-white sm:bg-gradient-to-br sm:from-white sm:to-blue-200">
+      <div className="flex flex-col lg:flex-row lg:bg-[#FCFCFB] lg:rounded-2xl lg:shadow-lg w-full max-w-md lg:max-w-2xl relative">
         <button
-          onClick={handleReturn}
+          onClick={() => navigate("/login")}
           className="absolute top-4 left-4 text-gray-400 hover:text-gray-900 focus:outline-none"
           aria-label="Voltar"
         >
-          <FaArrowLeft className="w-6 h-6" />
+          <ArrowLeft className="w-6 h-6" />
         </button>
+
         <aside className="hidden lg:block lg:w-1/2">
           <img
             src={video}
@@ -76,102 +59,91 @@ function ResetPassword() {
             className="w-full h-full p-14 object-cover rounded-l-lg"
           />
         </aside>
+
         <main className="w-full lg:w-1/2 p-8">
-          <div>
+          <div className="mb-8 text-center">
             <img src={logo2} alt="Logo" className="w-20 mx-auto mb-4" />
+            <h2 className="text-xl font-bold text-balance">Redefinir senha</h2>
+            <p className="mt-2 text-sm text-gray-600">
+              Por favor, insira a nova senha e confirme para prosseguir
+            </p>
           </div>
-          <div className="mb-4 text-center">
-            <h2 className="text-xl font-bold text-balance">
-              Redefina sua senha
-            </h2>
-          </div>
-          <form onSubmit={handleSubmit}>
-            <div className="mb-4 relative">
+
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div>
               <label
-                htmlFor="password"
-                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="senha"
+                className="block text-gray-700 text-sm font-bold mb-1"
               >
                 Nova Senha
               </label>
-              <input
-                id="password"
-                type={senhaVisivel ? "text" : "password"}
-                placeholder="Digite sua nova senha"
-                value={password}
-                onChange={handlePasswordChange}
-                className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
-                  !isPasswordValid && password
-                    ? "border-red-500 border-[3px]"
-                    : "border-gray-300"
-                }`}
-              />
-              <button
-                type="button"
-                className={`absolute
-                  ${
-                    !isPasswordValid && password
-                      ? "top-[2.5rem]"
-                      : "bottom-[0.7rem]"
-                  } right-0 pr-3 flex items-center text-gray-600`}
-                onClick={mudarVisibilidadeSenha}
-              >
-                {senhaVisivel ? <FaEyeSlash /> : <FaEye />}
-              </button>
-              {!isPasswordValid && password && (
-                <p className="text-red-500 text-xs italic mt-2">
-                  A senha deve ter pelo menos 6 caracteres, incluindo uma letra
-                  maiúscula, uma minúscula, um número e um caractere especial.
-                </p>
-              )}
+              <div className="relative">
+                <MaskedInput
+                  id="senha"
+                  placeholder="Digite sua nova senha"
+                  name="senha"
+                  value={formData.senha}
+                  type={senhaVisivel ? "text" : "password"}
+                  validationPattern=".{6,}"
+                  errorMessage="Senha deve ter pelo menos 6 caracteres"
+                  onChange={handleChange}
+                  required
+                  hasIcon={true}
+                  eyesIcon={true}
+                />
+                <button
+                  type="button"
+                  onClick={() => setSenhaVisivel(!senhaVisivel)}
+                  className="absolute right-3 top-3 text-gray-400 hover:text-gray-600"
+                >
+                  {senhaVisivel ? (
+                    <EyeOff className="h-5 w-5" />
+                  ) : (
+                    <Eye className="h-5 w-5" />
+                  )}
+                </button>
+              </div>
             </div>
-            <div className="mb-4 relative">
-              <label
-                htmlFor="confirm-password"
-                className="block text-gray-700 text-sm font-bold mb-2"
-              >
-                Confirmar Senha
+            <div>
+              <label className="block text-gray-700 text-sm font-bold mb-1">
+                Confirme a senha
               </label>
-              <input
-                id="confirm-password"
-                type={confirmSenhaVisivel ? "text" : "password"}
-                placeholder="Confirme sua nova senha"
-                value={confirmPassword}
-                onChange={handleConfirmPasswordChange}
-                className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
-                  !doPasswordsMatch && confirmPassword
-                    ? "border-red-500 border-[3px]"
-                    : "border-gray-300"
-                }`}
-              />
-              <button
-                type="button"
-                className={`absolute
-                  ${
-                    !doPasswordsMatch && confirmPassword
-                      ? "top-[2.5rem]"
-                      : "top-[2.4rem]"
-                  } right-0 pr-3 flex items-center text-gray-600`}
-                onClick={mudarVisibilidadeConfirmSenha}
-              >
-                {confirmSenhaVisivel ? <FaEyeSlash /> : <FaEye />}
-              </button>
-              {!doPasswordsMatch && confirmPassword && (
-                <p className="text-red-500 text-xs italic mt-2">
-                  As senhas não coincidem.
-                </p>
-              )}
+              <div className="relative">
+                <MaskedInput
+                  id="confirmacaoSenha"
+                  placeholder="Digite novamente a senha"
+                  name="confirmacaoSenha"
+                  value={confirmacaoSenha}
+                  type="password"
+                  customValidation={(value) => value === formData.senha}
+                  errorMessage="As senhas não conferem"
+                  onChange={(e) => setConfirmacaoSenha(e.target.value)}
+                  required
+                  hasIcon={true}
+                  eyesIcon={true}
+                />
+                <button
+                  type="button"
+                  onClick={() => setSenhaConfirmaVisivel(!senhaConfirmaVisivel)}
+                  className="absolute right-3 top-3 text-gray-400 hover:text-gray-600"
+                >
+                  {senhaConfirmaVisivel ? (
+                    <EyeOff className="h-5 w-5" />
+                  ) : (
+                    <Eye className="h-5 w-5" />
+                  )}
+                </button>
+              </div>
             </div>
-            <div className="mb-4">
+            <div className="flex justify-center">
               <button
                 type="submit"
-                disabled={!isPasswordValid || !doPasswordsMatch}
-                className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full ${
-                  !isPasswordValid || !doPasswordsMatch
-                    ? "opacity-50 cursor-not-allowed"
-                    : ""
+                className={`inline-flex max-sm:w-full items-center justify-center gap-2 rounded-md bg-gradient-to-r from-[#07AFFF] to-[#0470AE] px-4 py-2 text-sm font-semibold text-white transition-all duration-300 hover:from-[#058EDC] hover:to-[#03598A] hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 ${
+                  !isFormValid() ? "opacity-50 cursor-not-allowed" : ""
                 }`}
+                disabled={!isFormValid()}
               >
-                Salvar
+                Redefinir senha
               </button>
             </div>
           </form>
@@ -181,4 +153,4 @@ function ResetPassword() {
   );
 }
 
-export default ResetPassword;
+export default CreateNewPassword;

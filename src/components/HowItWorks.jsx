@@ -10,37 +10,37 @@ import {
 const HowItWorks = () => {
   const steps = [
     {
-      icon: <Search className="w-8 h-8 mb-4 text-blue-600" />,
+      icon: <Search className="w-8 h-8 mb-4 text-[#07AFFF]" />,
       title: "Escolha o serviço",
       description:
         "Selecione o tipo de serviço que você precisa entre nossa variedade de profissionais qualificados",
     },
     {
-      icon: <Calendar className="w-8 h-8 mb-4 text-blue-600" />,
+      icon: <Calendar className="w-8 h-8 mb-4 text-[#07AFFF]" />,
       title: "Agende uma data",
       description:
         "Escolha o melhor dia e horário para receber o profissional em sua casa ou empresa",
     },
     {
-      icon: <User className="w-8 h-8 mb-4 text-blue-600" />,
+      icon: <User className="w-8 h-8 mb-4 text-[#07AFFF]" />,
       title: "Profissional ideal",
       description:
         "Selecionamos o melhor profissional próximo a você, com experiência comprovada",
     },
     {
-      icon: <Home className="w-8 h-8 mb-4 text-blue-600" />,
+      icon: <Home className="w-8 h-8 mb-4 text-[#07AFFF]" />,
       title: "Serviço realizado",
       description:
         "O profissional vai até você e realiza o serviço com qualidade e garantia",
     },
     {
-      icon: <CheckCircle className="w-8 h-8 mb-4 text-blue-600" />,
+      icon: <CheckCircle className="w-8 h-8 mb-4 text-[#07AFFF]" />,
       title: "Avalie o serviço",
       description:
         "Após a conclusão, avalie o profissional e nos ajude a manter o alto padrão",
     },
     {
-      icon: <MessageSquare className="w-8 h-8 mb-4 text-blue-600" />,
+      icon: <MessageSquare className="w-8 h-8 mb-4 text-[#07AFFF]" />,
       title: "Suporte contínuo",
       description:
         "Conte com nossa equipe para qualquer necessidade durante todo o processo",
@@ -51,8 +51,9 @@ const HowItWorks = () => {
     <section className="py-16 px-6 md:px-8 bg-white" id="comoFunciona">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-semibold mb-4 text-blue-600">
-            Como funciona a fixLy?
+          <h2 className="text-3xl font-semibold text-gray-800 mb-12">
+            Como funciona a{" "}
+            <span className="text-[#07AFFF] font-bold">fixLy?</span>{" "}
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Em poucos cliques conectamos você aos melhores profissionais de
