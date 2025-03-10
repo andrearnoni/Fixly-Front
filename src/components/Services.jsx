@@ -12,7 +12,7 @@ const Services = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-2">
                     
                     {profissionals.map((profissionals, index) => (
-                        <div key={index} className="bg-white flex flex-col rounded shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100 animate-fade-in">
+                        <div key={index} className="bg-white flex flex-col rounded shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100 animate-fade-in outline outline-1 outline-blue-900">
                             <div className="px-4 py-4 h-full flex flex-col justify-between">
                                 <div className="font-bold text-base line-clamp-none sm:line-clamp-3">
                                     "{profissionals.descricao}"

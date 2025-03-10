@@ -67,7 +67,7 @@ function GlobalContext({ children }) {
     resetRegistration,
     chatOpen,
     setChatOpen,
-    toggleChat,
+    toggleChat
   };
 
   return <Context.Provider value={value}>{children}</Context.Provider>;
