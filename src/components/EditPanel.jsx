@@ -138,6 +138,17 @@ function EditPanel() {
       }).then((result) => {
         if (result.isConfirmed) {
           navigate("/editar-endereco");
+        } else {
+          const userType =
+            formData.tipo || infoUsuario.roles?.[0]?.replace("ROLE_", "");
+
+          if (userType === "CLIENTE") {
+            navigate("/home-usuario");
+          } else if (userType === "PRESTADOR") {
+            navigate("/dashboard");
+          } else {
+            navigate("/");
+          }
         }
       });
     } catch (error) {
@@ -173,6 +184,7 @@ function EditPanel() {
       cancelButtonText: "Cancelar",
     }).then((result) => {
       if (result.isConfirmed && infoUsuario?.id) {
+        setIsLoading(true);
         const userId = infoUsuario.id;
         const token = authService.getAccessToken();
 
@@ -183,18 +195,19 @@ function EditPanel() {
             },
           })
           .then(() => {
+            setIsLoading(false);
             Swal.fire({
               icon: "success",
               title: "Perfil excluído com sucesso!",
               text: "Todos os seus dados foram removidos.",
-              showConfirmButton: false,
-              timer: 2000,
+              confirmButtonText: "OK",
             }).then(() => {
               logout();
               navigate("/");
             });
           })
           .catch((error) => {
+            setIsLoading(false);
             console.error("Erro ao excluir perfil:", error);
             Swal.fire({
               icon: "error",

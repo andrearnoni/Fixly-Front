@@ -2,10 +2,9 @@ import { useState } from "react";
 import { Send, X } from "lucide-react";
 
 function UserChat() {
-
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   const sendMessage = () => {
     if (input.trim() !== "") {
@@ -15,14 +14,15 @@ function UserChat() {
   };
 
   return (
-
     <div>
-
       {isOpen && (
-        <div className="fixed md:mb-0 lg:mb-0 sm:mb-0 mb-16 bottom-4 left-4 w-80 bg-white shadow-lg rounded-2xl p-4 flex flex-col border border-gray-300 z-[99999]">
+        <div className="fixed bottom-4 left-4 w-80 bg-white shadow-lg rounded-2xl p-4 flex flex-col border border-gray-300 z-[99999]">
           <div className="flex justify-between items-center border-b border-gray-300 pb-2 mb-2">
             <h2 className="text-lg font-semibold">Chat</h2>
-            <button onClick={() => setIsOpen(false)} className="text-gray-500 hover:text-gray-700">
+            <button
+              onClick={() => setIsOpen(false)}
+              className="text-gray-500 hover:text-gray-700"
+            >
               <X size={20} />
             </button>
           </div>
@@ -30,8 +30,11 @@ function UserChat() {
             {messages.map((msg, index) => (
               <div
                 key={index}
-                className={`p-2 rounded-lg max-w-[75%] text-sm ${msg.sender === "user" ? "bg-blue-500 text-white self-end" : "bg-gray-200 text-black"
-                  }`}
+                className={`p-2 rounded-lg max-w-[75%] text-sm ${
+                  msg.sender === "user"
+                    ? "bg-blue-500 text-white self-end"
+                    : "bg-gray-200 text-black"
+                }`}
               >
                 {msg.text}
               </div>

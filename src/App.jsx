@@ -9,7 +9,6 @@ import ForgottenPassword from "./pages/ForgottenPassword";
 import CreateNewPassword from "./pages/CreateNewPassword";
 import Error from "./pages/Error";
 import ChatBot from "./components/ChatBot";
-import ScrollToTop from "./components/ScrollWithConfig";
 import "./input.css";
 import { useContext } from "react";
 import Context from "./context/Context";
