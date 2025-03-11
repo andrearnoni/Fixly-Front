@@ -98,7 +98,6 @@ function GlobalContext({ children }) {
     resetRegistration,
     chatOpen,
     setChatOpen,
-    toggleChat
     logout,
   };
 
