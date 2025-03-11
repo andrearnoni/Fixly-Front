@@ -31,8 +31,16 @@ function GlobalContext({ children }) {
   const [isLoading, setIsLoading] = useState(true);
   const [formData, setFormData] = useState(defaultFormData);
   const [chatOpen, setChatOpen] = useState(false);
+  // Novo estado para a foto de perfil
+  const [profileImage, setProfileImage] = useState(null);
 
   useEffect(() => {
+    // Carregar a imagem do localStorage quando o componente iniciar
+    const savedImage = localStorage.getItem("userProfileImage");
+    if (savedImage) {
+      setProfileImage(savedImage);
+    }
+
     const token = authService.getAccessToken();
     if (token) {
       setIsLoading(true);
@@ -56,6 +64,38 @@ function GlobalContext({ children }) {
     }
   }, []);
 
+  // Nova função para gerenciar o upload de imagem
+  const handleProfileImageUpload = (file) => {
+    if (!file) return;
+
+    // Verificações de tipo e tamanho
+    if (!file.type.match("image.*")) {
+      throw new Error("Por favor selecione uma imagem válida");
+    }
+
+    if (file.size > 2 * 1024 * 1024) {
+      throw new Error("Imagem muito grande! O tamanho máximo é 2MB.");
+    }
+
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        try {
+          const imageBase64 = e.target.result;
+          setProfileImage(imageBase64);
+          localStorage.setItem("userProfileImage", imageBase64);
+          resolve(imageBase64);
+        } catch (error) {
+          reject(error);
+        }
+      };
+
+      reader.onerror = (error) => reject(error);
+      reader.readAsDataURL(file);
+    });
+  };
+
   const startLoading = () => {
     setIsLoading(true);
     setTimeout(() => {
@@ -70,6 +110,11 @@ function GlobalContext({ children }) {
   };
 
   const logout = () => {
+    // Remover a imagem ao fazer logout
+    localStorage.removeItem("userProfileImage");
+    setProfileImage(null);
+
+    // Logout existente
     authService.logout();
     setInfoUsuario(null);
   };
@@ -99,6 +144,9 @@ function GlobalContext({ children }) {
     chatOpen,
     setChatOpen,
     logout,
+    // Adicionar ao contexto
+    profileImage,
+    handleProfileImageUpload,
   };
 
   return <Context.Provider value={value}>{children}</Context.Provider>;

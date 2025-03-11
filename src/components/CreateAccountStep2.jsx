@@ -5,6 +5,7 @@ import MaskedInput from "../components/MaskedInput";
 import autoCompleteService from "../services/AutoCompleteService";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import logo2 from "../img/logo2.png";
+import StateSelect from "../components/StateSelect";
 
 const CreateAccountStep2 = () => {
   const { setStep, tipoUsuario, formData, setFormData, setStepCompleto } =
@@ -230,44 +231,10 @@ const CreateAccountStep2 = () => {
                   Estado
                 </label>
                 <div>
-                  <select
-                    className="flex h-10 w-full rounded-md border border-input bg-white/50 px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
-                    name="estado"
-                    id="estado"
+                  <StateSelect
                     value={formData.estado}
                     onChange={handleChange}
-                  >
-                    <option disabled value="">
-                      Selecione um estado
-                    </option>
-                    <option value="AC">Acre</option>
-                    <option value="AL">Alagoas</option>
-                    <option value="AP">Amapá</option>
-                    <option value="AM">Amazonas</option>
-                    <option value="BA">Bahia</option>
-                    <option value="CE">Ceará</option>
-                    <option value="DF">Distrito Federal</option>
-                    <option value="ES">Espírito Santo</option>
-                    <option value="GO">Goiás</option>
-                    <option value="MA">Maranhão</option>
-                    <option value="MT">Mato Grosso</option>
-                    <option value="MS">Mato Grosso do Sul</option>
-                    <option value="MG">Minas Gerais</option>
-                    <option value="PA">Pará</option>
-                    <option value="PB">Paraíba</option>
-                    <option value="PR">Paraná</option>
-                    <option value="PE">Pernambuco</option>
-                    <option value="PI">Piauí</option>
-                    <option value="RJ">Rio de Janeiro</option>
-                    <option value="RN">Rio Grande do Norte</option>
-                    <option value="RS">Rio Grande do Sul</option>
-                    <option value="RO">Rondônia</option>
-                    <option value="RR">Roraima</option>
-                    <option value="SC">Santa Catarina</option>
-                    <option value="SP">São Paulo</option>
-                    <option value="SE">Sergipe</option>
-                    <option value="TO">Tocantins</option>
-                  </select>
+                  />
                 </div>
               </div>
             </div>
