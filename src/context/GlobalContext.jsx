@@ -64,11 +64,9 @@ function GlobalContext({ children }) {
     }
   }, []);
 
-  // Nova função para gerenciar o upload de imagem
   const handleProfileImageUpload = (file) => {
     if (!file) return;
 
-    // Verificações de tipo e tamanho
     if (!file.type.match("image.*")) {
       throw new Error("Por favor selecione uma imagem válida");
     }
@@ -110,11 +108,8 @@ function GlobalContext({ children }) {
   };
 
   const logout = () => {
-    // Remover a imagem ao fazer logout
     localStorage.removeItem("userProfileImage");
     setProfileImage(null);
-
-    // Logout existente
     authService.logout();
     setInfoUsuario(null);
   };
@@ -143,9 +138,8 @@ function GlobalContext({ children }) {
     resetRegistration,
     chatOpen,
     setChatOpen,
-    toggleChat
+    toggleChat,
     logout,
-    // Adicionar ao contexto
     profileImage,
     handleProfileImageUpload,
   };
