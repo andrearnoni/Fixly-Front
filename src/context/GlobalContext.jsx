@@ -1,19 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Context from "./Context";
+import * as authService from "../services/auth-service";
 
 const defaultFormData = {
   nome: "",
   email: "",
+  tipoUsuario: "",
   senha: "",
   nascimento: "",
   cpfCnpj: "",
   cep: "",
   endereco: "",
   numero: "",
+  complemento: "",
   bairro: "",
   cidade: "",
   estado: "",
-  especialidade: "",
+  principal: true,
 };
 
 function GlobalContext({ children }) {
@@ -22,11 +25,36 @@ function GlobalContext({ children }) {
   const [senhaVisivel, setSenhaVisivel] = useState(false);
   const [step, setStep] = useState(1);
   const [stepCompleto, setStepCompleto] = useState(false);
-  const [tipoUsuario, setTipoUsuario] = useState("cliente");
+  const [tipoUsuario, setTipoUsuario] = useState("");
+  const [infoUsuario, setInfoUsuario] = useState(null);
   const [termosAceitos, setTermosAceitos] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [formData, setFormData] = useState(defaultFormData);
   const [chatOpen, setChatOpen] = useState(false);
+
+  useEffect(() => {
+    const token = authService.getAccessToken();
+    if (token) {
+      setIsLoading(true);
+      authService
+        .fetchUserData(token)
+        .then((response) => {
+          setInfoUsuario(response.data);
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          if (error.response && error.response.status === 401) {
+            authService.logout();
+            setInfoUsuario(null);
+          } else {
+            console.error(error);
+          }
+          setIsLoading(false);
+        });
+    } else {
+      setIsLoading(false);
+    }
+  }, []);
 
   const startLoading = () => {
     setIsLoading(true);
@@ -39,11 +67,12 @@ function GlobalContext({ children }) {
     setFormData(defaultFormData);
     setStep(1);
     setStepCompleto(false);
-    setTipoUsuario("cliente");
-    setTermosAceitos(false);
   };
 
-  const toggleChat = () => setChatOpen(!chatOpen);
+  const logout = () => {
+    authService.logout();
+    setInfoUsuario(null);
+  };
 
   const value = {
     clientes,
@@ -62,12 +91,15 @@ function GlobalContext({ children }) {
     setTermosAceitos,
     formData,
     setFormData,
+    infoUsuario,
+    setInfoUsuario,
     isLoading,
     startLoading,
     resetRegistration,
     chatOpen,
     setChatOpen,
     toggleChat
+    logout,
   };
 
   return <Context.Provider value={value}>{children}</Context.Provider>;
