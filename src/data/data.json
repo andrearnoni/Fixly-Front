@@ -1,0 +1,82 @@
+[
+    {
+      "nome": "Pintura de Casa",
+      "descricao": "Pintura interna e externa de ambientes residenciais e comerciais.",
+      "categoria": "Pintor",
+      "precoMinimo": 500,
+      "precoMaximo": 2000,
+      "prestador": "José Silva"
+    },
+    {
+      "nome": "Reforma de Banheiro",
+      "descricao": "Troca de azulejos, encanamento e acabamento geral.",
+      "categoria": "Pedreiro",
+      "precoMinimo": 1500,
+      "precoMaximo": 6000,
+      "prestador": "Carlos Souza"
+    },
+    {
+      "nome": "Instalação de Ar Condicionado",
+      "descricao": "Instalação de sistemas de ar condicionado de diversos modelos.",
+      "categoria": "Técnico de Climatização",
+      "precoMinimo": 350,
+      "precoMaximo": 1200,
+      "prestador": "Ana Oliveira"
+    },
+    {
+      "nome": "Serviço de Eletricista",
+      "descricao": "Reparo e instalação elétrica em residências e estabelecimentos comerciais.",
+      "categoria": "Eletricista",
+      "precoMinimo": 200,
+      "precoMaximo": 1500,
+      "prestador": "Lucas Mendes"
+    },
+    {
+      "nome": "Jardinagem e Paisagismo",
+      "descricao": "Manutenção de jardins, poda e criação de projetos paisagísticos.",
+      "categoria": "Jardineiro",
+      "precoMinimo": 100,
+      "precoMaximo": 2500,
+      "prestador": "Maria Costa"
+    },
+    {
+      "nome": "Fotografia Profissional",
+      "descricao": "Fotografia de eventos, ensaios e outros serviços fotográficos.",
+      "categoria": "Fotógrafo",
+      "precoMinimo": 800,
+      "precoMaximo": 4000,
+      "prestador": "Rafael Lima"
+    },
+    {
+      "nome": "Aulas de Musica",
+      "descricao": "Aulas particulares de música para diversos instrumentos.",
+      "categoria": "Professor de Música",
+      "precoMinimo": 100,
+      "precoMaximo": 500,
+      "prestador": "Fernanda Pereira"
+    },
+    {
+      "nome": "Consultoria de Marketing Digital",
+      "descricao": "Planejamento e execução de estratégias de marketing para empresas.",
+      "categoria": "Consultor de Marketing",
+      "precoMinimo": 1000,
+      "precoMaximo": 10000,
+      "prestador": "Felipe Almeida"
+    },
+    {
+      "nome": "Encantamento de Ambientes",
+      "descricao": "Decoração de interiores, incluindo móveis e iluminação.",
+      "categoria": "Designer de Interiores",
+      "precoMinimo": 3000,
+      "precoMaximo": 15000,
+      "prestador": "Juliana Rocha"
+    },
+    {
+      "nome": "Serviço de Limpeza Profunda",
+      "descricao": "Limpeza pesada de ambientes comerciais e residenciais.",
+      "categoria": "Limpeza",
+      "precoMinimo": 150,
+      "precoMaximo": 2000,
+      "prestador": "Patrícia Fernandes"
+    }
+  ]  
