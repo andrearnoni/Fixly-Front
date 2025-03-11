@@ -143,6 +143,7 @@ function GlobalContext({ children }) {
     resetRegistration,
     chatOpen,
     setChatOpen,
+    toggleChat
     logout,
     // Adicionar ao contexto
     profileImage,

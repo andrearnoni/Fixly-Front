@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import GlobalContext from "./context/GlobalContext";
 import Loading from "./components/Loading";
 import Home from "./pages/Home";
+import HomeUser from "./pages/HomeUser";
 import Login from "./pages/Login";
 import CreateAccount from "./pages/CreateAccount";
 import ForgottenPassword from "./pages/ForgottenPassword";
@@ -31,10 +32,12 @@ function AppContent() {
         <Route path="/esqueci-a-senha" element={<ForgottenPassword />} />
         <Route path="/resetar-senha" element={<CreateNewPassword />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/home-usuario" element={<HomeUser />} />
         <Route path="/editar-usuario" element={<EditUser />} />
         <Route path="/editar-endereco" element={<AddressPanel />} />
         <Route path="/contato" element={<Contact />} />
         <Route path="/pagamento" element={<Payment />} />
+
         <Route path="*" element={<Error />} />
       </Routes>
       <ChatBot />
