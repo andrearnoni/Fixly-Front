@@ -31,11 +31,9 @@ function GlobalContext({ children }) {
   const [isLoading, setIsLoading] = useState(true);
   const [formData, setFormData] = useState(defaultFormData);
   const [chatOpen, setChatOpen] = useState(false);
-  // Novo estado para a foto de perfil
   const [profileImage, setProfileImage] = useState(null);
 
   useEffect(() => {
-    // Carregar a imagem do localStorage quando o componente iniciar
     const savedImage = localStorage.getItem("userProfileImage");
     if (savedImage) {
       setProfileImage(savedImage);
@@ -138,7 +136,6 @@ function GlobalContext({ children }) {
     resetRegistration,
     chatOpen,
     setChatOpen,
-    toggleChat,
     logout,
     profileImage,
     handleProfileImageUpload,
