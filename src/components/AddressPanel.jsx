@@ -1,4 +1,5 @@
 import { useContext, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Context from "../context/Context";
 import Swal from "sweetalert2";
 import axios from "axios";
@@ -23,6 +24,8 @@ function AddressPanel() {
   const [enderecoId, setEnderecoId] = useState(null);
 
   const [loadingCep, setLoadingCep] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const loadInitialData = async () => {
@@ -128,8 +131,6 @@ function AddressPanel() {
         },
       };
 
-      console.log("Enviando dados de endereço:", addressPayload);
-
       await axios.put(
         `http://localhost:8080/usuarios/${infoUsuario.id}/enderecos/${enderecoId}`,
         addressPayload,
@@ -144,8 +145,18 @@ function AddressPanel() {
       Swal.fire({
         icon: "success",
         title: "Dados de endereço atualizados com sucesso!",
-        showConfirmButton: false,
-        timer: 1500,
+        confirmButtonText: "OK",
+      }).then(() => {
+        const userType =
+          infoUsuario.tipo || infoUsuario.roles?.[0]?.replace("ROLE_", "");
+
+        if (userType === "CLIENTE") {
+          navigate("/home-usuario");
+        } else if (userType === "PRESTADOR") {
+          navigate("/dashboard");
+        } else {
+          navigate("/");
+        }
       });
     } catch (error) {
       console.error("Erro ao atualizar dados de endereço:", error);

@@ -6,7 +6,7 @@ import seta_esquerda from "../img/seta-esquerda.png";
 import tema from "../img/lua.png";
 import sair from "../img/sair.png";
 
-function SideBar({ toggleDarkMode, isDarkMode }) {
+function UserSideBar({ toggleDarkMode, isDarkMode }) {
   const [isOpen, setIsOpen] = useState(false);
   const { infoUsuario, logout } = useContext(Context);
   const navigate = useNavigate();
@@ -35,7 +35,7 @@ function SideBar({ toggleDarkMode, isDarkMode }) {
     <>
       <button
         onClick={toggleSidebar}
-        className="md:hidden fixed top-4 left-4 z-50 p-2 rounded-lg bg-white shadow-md"
+        className="md:hidden fixed top-4 left-4 z-40 p-2 rounded-lg bg-white shadow-md"
       >
         <div className="w-6 h-0.5 bg-gray-600 mb-1"></div>
         <div className="w-6 h-0.5 bg-gray-600 mb-1"></div>
@@ -43,14 +43,14 @@ function SideBar({ toggleDarkMode, isDarkMode }) {
       </button>
       {isOpen && (
         <div
-          className="md:hidden fixed inset-0 bg-black bg-opacity-50 z-40"
+          className="md:hidden fixed inset-0 bg-black bg-opacity-50 z-30"
           onClick={toggleSidebar}
         ></div>
       )}
       <div
         className={`fixed md:static h-screen ${
           isDarkMode ? "bg-gray-800 text-white" : "bg-white text-gray-900"
-        } z-50 transition-all duration-300 ${
+        } z-40 transition-all duration-300 ${
           isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
         }`}
       >
@@ -85,7 +85,7 @@ function SideBar({ toggleDarkMode, isDarkMode }) {
                   isDarkMode ? "text-gray-300" : "text-gray-500"
                 }`}
               >
-                Main Menu
+                Menu Principal
               </h2>
               <nav className="space-y-3 mt-2">
                 <a
@@ -213,4 +213,4 @@ function SideBar({ toggleDarkMode, isDarkMode }) {
   );
 }
 
-export default SideBar;
+export default UserSideBar;

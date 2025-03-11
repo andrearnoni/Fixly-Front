@@ -1,17 +1,11 @@
-import { useContext } from "react";
-
 import ContactForm from "../components/ContactForm";
 
-function Contact(){
-    return (
-
-        <div>
-
-            <ContactForm/>
-        </div>
-    )
-        
-    
+function Contact() {
+  return (
+    <div>
+      <ContactForm />
+    </div>
+  );
 }
 
 export default Contact;

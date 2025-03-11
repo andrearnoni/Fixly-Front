@@ -62,7 +62,7 @@ function Login() {
       if (getRole === "ROLE_PRESTADOR") {
         navigate("/dashboard");
       } else if (getRole === "ROLE_CLIENTE") {
-        navigate("/usuario");
+        navigate("/home-usuario");
       } else {
         navigate("/");
       }
