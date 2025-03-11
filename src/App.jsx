@@ -17,6 +17,7 @@ import Dashboard from "./pages/Dashboard";
 import EditUser from "./pages/EditUser";
 import Payment from "./pages/Payment";
 import Contact from "./pages/Contact";
+import AddressPanel from "./components/AddressPanel";
 
 function AppContent() {
   const { isLoading } = useContext(Context);
@@ -33,6 +34,7 @@ function AppContent() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/home-usuario" element={<HomeUser />} />
         <Route path="/editar-usuario" element={<EditUser />} />
+        <Route path="/editar-endereco" element={<AddressPanel />} />
         <Route path="/contato" element={<Contact />} />
         <Route path="/pagamento" element={<Payment />} />
 

@@ -31,8 +31,14 @@ function GlobalContext({ children }) {
   const [isLoading, setIsLoading] = useState(true);
   const [formData, setFormData] = useState(defaultFormData);
   const [chatOpen, setChatOpen] = useState(false);
+  const [profileImage, setProfileImage] = useState(null);
 
   useEffect(() => {
+    const savedImage = localStorage.getItem("userProfileImage");
+    if (savedImage) {
+      setProfileImage(savedImage);
+    }
+
     const token = authService.getAccessToken();
     if (token) {
       setIsLoading(true);
@@ -56,6 +62,36 @@ function GlobalContext({ children }) {
     }
   }, []);
 
+  const handleProfileImageUpload = (file) => {
+    if (!file) return;
+
+    if (!file.type.match("image.*")) {
+      throw new Error("Por favor selecione uma imagem válida");
+    }
+
+    if (file.size > 2 * 1024 * 1024) {
+      throw new Error("Imagem muito grande! O tamanho máximo é 2MB.");
+    }
+
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        try {
+          const imageBase64 = e.target.result;
+          setProfileImage(imageBase64);
+          localStorage.setItem("userProfileImage", imageBase64);
+          resolve(imageBase64);
+        } catch (error) {
+          reject(error);
+        }
+      };
+
+      reader.onerror = (error) => reject(error);
+      reader.readAsDataURL(file);
+    });
+  };
+
   const startLoading = () => {
     setIsLoading(true);
     setTimeout(() => {
@@ -70,6 +106,8 @@ function GlobalContext({ children }) {
   };
 
   const logout = () => {
+    localStorage.removeItem("userProfileImage");
+    setProfileImage(null);
     authService.logout();
     setInfoUsuario(null);
   };
@@ -99,6 +137,8 @@ function GlobalContext({ children }) {
     chatOpen,
     setChatOpen,
     logout,
+    profileImage,
+    handleProfileImageUpload,
   };
 
   return <Context.Provider value={value}>{children}</Context.Provider>;

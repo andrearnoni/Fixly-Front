@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Context from "../context/Context";
+import Avatar from "../components/Avatar";
 import seta_esquerda from "../img/seta-esquerda.png";
 import tema from "../img/lua.png";
 import sair from "../img/sair.png";
@@ -61,11 +62,7 @@ function SideBar({ toggleDarkMode, isDarkMode }) {
           <div>
             <div className="flex items-center justify-between mt-8 md:mt-0">
               <div className="flex items-center space-x-3">
-                <div
-                  className={`w-8 h-8 ${
-                    isDarkMode ? "bg-gray-600" : "bg-gray-300"
-                  } rounded-full`}
-                ></div>
+                <Avatar />
                 <span className="text-base" id="userName">
                   {infoUsuario
                     ? infoUsuario.nome
